@@ -9,38 +9,39 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+		integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 	<link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 	<header class="header">
 		<!-- <div class="background"> -->
-			<div class="container">
-				<div class="header__top">
-					<div class="header__top-menu">
-						<div class="logo">
-							<img src="/assets/images/logo.png" alt="logo" class="logo--main">
-							<img src="/assets/images/logo.png" alt="" class="logo--reverse">
-						</div>
-						<nav class="header__top-nav">
-							<ul class="header__top-nav-items">
-								<li class="header__top-nav-item"><a href="#" class="header__top-nav-links">Main</a></li>
-								<li class="header__top-nav-item"><a href="#" class="header__top-nav-links">Gallery</a></li>
-								<li class="header__top-nav-item"><a href="#" class="header__top-nav-links">News</a></li>
-								<li class="header__top-nav-item"><a href="#" class="header__top-nav-links">Profile</a></li>
-							</ul>
-						</nav>
+		<div class="container">
+			<div class="header__top">
+				<div class="header__top-menu">
+					<div class="logo">
+						<img src="/assets/images/logo.png" alt="logo" class="logo--main">
+						<img src="/assets/images/logo.png" alt="" class="logo--reverse">
 					</div>
-					<div class="header__top-phone">
-						<p class="header__top-phonenumber">+544 3490 00000</p>
-						<p class="header__top-phonetext">Звони скорее!</p>
-					</div>
+					<nav class="header__top-nav">
+						<ul class="header__top-nav-items">
+							<li class="header__top-nav-item"><a href="#" class="header__top-nav-links">Main</a></li>
+							<li class="header__top-nav-item"><a href="#" class="header__top-nav-links">Gallery</a></li>
+							<li class="header__top-nav-item"><a href="#" class="header__top-nav-links">News</a></li>
+							<li class="header__top-nav-item"><a href="#" class="header__top-nav-links">Profile</a></li>
+						</ul>
+					</nav>
 				</div>
-				<div class="header__main">
-					<h2 class="header__main-title">Найдено 48 котов</h2>
+				<div class="header__top-phone">
+					<p class="header__top-phonenumber">+544 3490 00000</p>
+					<p class="header__top-phonetext">Звони скорее!</p>
 				</div>
 			</div>
+			<div class="header__main">
+				<h2 class="header__main-title">Найдено 48 котов</h2>
+			</div>
+		</div>
 		<!-- </div> -->
 	</header>
 
@@ -59,6 +60,27 @@
 			<div class="main__loadmore"></div>
 		</div>
 	</main>
+
+	<section class="promo">
+		<div class="container">
+			<div class="promo__inner">
+			<div class="promo__text">
+				<h2 class="promo__text-title">Успей купить!</h2>
+				<p class="promo__text-subtitle">Подпишись и успей<br>словить все акции</p>
+			</div>
+			<div class="promo__form">
+				<form action="">
+					<input type="email" class="promo__form-email" placeholder="Email">
+					<input type="submit" class="promo__form-button" value="Подписаться">
+					<div class="promo__form-checkbox">
+						<input type="checkbox" id="subscribe">
+						<label for="subscribe">Подписаться на новости</label>
+					</div>
+				</form>
+			</div>
+			</div>
+		</div>
+	</section>
 
 	<script src="/js/index.js"></script>
 </body>

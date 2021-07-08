@@ -178,3 +178,90 @@ html {
 .main__sort-price {
   margin-right: 2em;
 }
+
+.promo__inner {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr;
+      grid-template-columns: 1fr 2fr;
+  padding: 5em;
+  background-color: #1f2021;
+  color: #fff;
+}
+
+.promo__text-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 58px;
+  margin-bottom: 26px;
+}
+
+.promo__text-subtitle {
+  font-size: 1.75rem;
+  line-height: 25px;
+}
+
+.promo__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.promo__form-email {
+  width: 25em;
+  height: 5em;
+  background: #fff;
+  border-radius: 10px;
+  padding-left: 33px;
+  margin-right: 16px;
+}
+
+.promo__form-button {
+  width: 20em;
+  height: 5em;
+  background: #6ebbd3;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 700;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.promo__form-checkbox {
+  margin-top: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.promo__form-checkbox input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.promo__form-checkbox label {
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
+}
+
+.promo__form-checkbox label:before {
+  content: " ";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 3px;
+  border: 1px solid #adb5bd;
+  margin-right: 18px;
+}

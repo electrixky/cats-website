@@ -163,3 +163,81 @@ html {
 		margin-right: 2em;
 	}
 }
+
+.promo {
+
+	&__inner {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		padding: 5em;
+		background-color: #1f2021;
+		color: #fff;
+	}
+
+	.promo__text {
+	}
+	&__text-title {
+		font-size: 3rem;
+		font-weight: 700;
+		line-height: 58px;
+		margin-bottom: 26px;
+	}
+
+	&__text-subtitle {
+		font-size: 1.75rem;
+    	line-height: 25px;
+	}
+
+	&__form {
+		display: flex;
+		justify-content: center;
+    align-items: center;
+	}
+
+	&__form-email {
+		width: 25em;
+    	height: 5em;
+    	background: #fff;
+    	border-radius: 10px;
+    	padding-left: 33px;
+    	margin-right: 16px;
+	}
+
+	&__form-button {
+		width: 20em;
+    height: 5em;
+    background: #6ebbd3;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+    transition: 1s;
+	}
+	&__form-checkbox {
+		margin-top: 24px;
+		display: flex;
+		align-items: center;
+	}
+
+	&__form-checkbox input {
+		visibility: hidden;
+		position: absolute;
+	}
+
+	&__form-checkbox label {
+		font-size: 14px;
+		line-height: 17px;
+		cursor: pointer;
+	}
+
+	&__form-checkbox label:before {
+		content: " ";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #adb5bd;
+    margin-right: 18px;
+	}
+}
