@@ -1,0 +1,218 @@
+{
+	"1":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "3 мес.",
+		"paw" : 4,
+		"price" : "30000 руб.",
+		"isLiked" : false,
+		"onDiscount" : true,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat1.png"
+	},
+	"2":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "4 мес.",
+		"paw" : 4,
+		"price" : "40000 руб.",
+		"isLiked" : true,
+		"onDiscount" : false,
+		"sold" : true,
+		"image" : "/assets/images/cats/cat2.png"
+	},
+	"3":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "1 мес.",
+		"paw" : 4,
+		"price" : "20000 руб.",
+		"isLiked" : false,
+		"onDiscount" : false,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat3.png"
+	},
+	"4":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "2 мес.",
+		"paw" : 4,
+		"price" : "25000 руб.",
+		"isLiked" : false,
+		"onDiscount" : false,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat2.png"
+	},
+	"5":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "5 мес.",
+		"paw" : 4,
+		"price" : "30000 руб.",
+		"isLiked" : false,
+		"onDiscount" : true,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat3.png"
+	},
+	"6":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "1 мес.",
+		"paw" : 4,
+		"price" : "10000 руб.",
+		"isLiked" : true,
+		"onDiscount" : false,
+		"sold" : true,
+		"image" : "/assets/images/cats/cat1.png"
+	},
+	"7":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "3 мес.",
+		"paw" : 4,
+		"price" : "30000 руб.",
+		"isLiked" : false,
+		"onDiscount" : true,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat1.png"
+	},
+	"8":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "4 мес.",
+		"paw" : 4,
+		"price" : "40000 руб.",
+		"isLiked" : true,
+		"onDiscount" : false,
+		"sold" : true,
+		"image" : "/assets/images/cats/cat2.png"
+	},
+	"9":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "1 мес.",
+		"paw" : 4,
+		"price" : "20000 руб.",
+		"isLiked" : false,
+		"onDiscount" : false,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat3.png"
+	},
+	"10":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "2 мес.",
+		"paw" : 4,
+		"price" : "25000 руб.",
+		"isLiked" : false,
+		"onDiscount" : false,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat1.png"
+	},
+	"11":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "5 мес.",
+		"paw" : 4,
+		"price" : "30000 руб.",
+		"isLiked" : false,
+		"onDiscount" : true,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat3.png"
+	},
+	"12":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "1 мес.",
+		"paw" : 4,
+		"price" : "10000 руб.",
+		"isLiked" : false,
+		"onDiscount" : false,
+		"sold" : true,
+		"image" : "/assets/images/cats/cat2.png"
+	},
+	"13":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "3 мес.",
+		"paw" : 4,
+		"price" : "30000 руб.",
+		"isLiked" : false,
+		"onDiscount" : true,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat1.png"
+	},
+	"14":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "4 мес.",
+		"paw" : 4,
+		"price" : "40000 руб.",
+		"isLiked" : false,
+		"onDiscount" : false,
+		"sold" : true,
+		"image" : "/assets/images/cats/cat2.png"
+	},
+	"15":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "1 мес.",
+		"paw" : 4,
+		"price" : "20000 руб.",
+		"isLiked" : false,
+		"onDiscount" : false,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat3.png"
+	},
+	"16":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "2 мес.",
+		"paw" : 4,
+		"price" : "25000 руб.",
+		"isLiked" : false,
+		"onDiscount" : false,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat1.png"
+	},
+	"17":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "5 мес.",
+		"paw" : 4,
+		"price" : "30000 руб.",
+		"isLiked" : false,
+		"onDiscount" : true,
+		"sold" : false,
+		"image" : "/assets/images/cats/cat3.png"
+	},
+	"18":
+	{
+		"name" : "Кот полосатый",
+		"color" : "Коричневый окрас",
+		"age" : "1 мес.",
+		"paw" : 4,
+		"price" : "10000 руб.",
+		"isLiked" : true,
+		"onDiscount" : false,
+		"sold" : true,
+		"image" : "/assets/images/cats/cat2.png"
+	}
+}
