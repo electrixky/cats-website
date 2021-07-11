@@ -14,23 +14,23 @@ function printCatsAmount(cats) {
 }
 
 function printCatsInfo(cats) {
+
 	printCatsAmount(cats)
 
 	let out = ''
 
 	for (let key in cats) {
-		if (key==='7') break;
 		out+=`
 		<div class="item">
 					<div class="item__inner">
 						<div class="item__inner-photo">
 							<img src="${cats[key]['image']}">
 							<div class="item__inner-heart"></div>
-							<div class="item__inner-sale">
+							<div class="item__inner-sale" data-sale="${cats[key]['onDiscount']}">
 								<span>-40%</span>
 							</div>
 						</div>
-						<div class="item__inner-content">
+						<div class="item__inner-content" data-id="${key}">
 							<h3 class="item__inner-title">${cats[key]['name']}</h3>
 							<div class="item__inner-decription">
 								<p class="color">${cats[key]['color']}<br>окрас</p>
@@ -43,35 +43,74 @@ function printCatsInfo(cats) {
 					</div>
 				</div>
 		`
+		
 	}
-
-	document.querySelector('.main__catalogue').innerHTML = out
-
-	// let catName = []
-	// let catColor = []
-	// let catAge = []
-	// let catPaw = []
-	// let catPrice = []
-
-	// for (let key in cats) {
-	// 	catName.push(cats[key]["name"])
-	// 	catColor.push(cats[key]["color"])
-	// 	catAge.push(cats[key]["age"])
-	// 	catPaw.push(cats[key]["paw"])
-	// 	catPrice.push(cats[key]["price"])
-	// }
 	
-	// let catsNames = document.querySelectorAll(".item__inner-title")
-	// let catsColors = document.querySelectorAll(".color")
-	// let catsAges = document.querySelectorAll(".age strong")
-	// let catsPaws = document.querySelectorAll(".paw strong")
-	// let catsPrices = document.querySelectorAll(".item__inner-price")
+	document.querySelector('.main__catalogue').innerHTML = out
+	//addDiscount()
+	
+	//addEventToButtons(cats)
 
-	// for (let i = 0; i < catsNames.length; i++) {
-	// 	catsNames[i].innerHTML=catName[i]
-	// 	catsColors[i].innerHTML=`${catColor[i]}<br>окрас`
-	// 	catsAges[i].innerHTML=`${catAge[i]} мес.`
-	// 	catsPaws[i].innerHTML=catPaw[i]
-	// 	catsPrices[i].innerHTML=`${catPrice[i]} руб.`
-	// }
+// 	const main = document.querySelector('main')
+
+// main.onclick = (event) => {
+// 	if(event.target.className === 'item__inner-button')
+// 	document.querySelector('.header__cart').style.visibility='visible'
+// }
 }
+
+// function addDiscount() {
+// 	let onSale = document.querySelectorAll("[data-sale]")
+// 	console.log(onSale)
+// }
+
+
+
+// function addEventToButtons(cats) {
+// 	for (let i = 0; i < cats.length; i++) {
+// 		document.querySelectorAll('.item__inner-button').addEventListener('click', addToCart())
+// 	}
+// }
+
+// function addToCart() {
+// 	document.querySelector('#addToCart').style.visibility = "visible"
+// 	setTimeout(hideCartText, 2000);
+// }
+
+// function hideCartText() {
+// 	document.querySelector('#addToCart').style.visibility = "hidden"
+// }
+
+// let loadMoreClicked = 0
+// document.querySelector('.main__loadmore-button').addEventListener('click', function(){
+// 	loadMoreClicked++
+// })
+
+
+(function() {
+ 
+	function trackScroll() {
+	  let scrolled = window.pageYOffset;
+	  let coords = document.documentElement.clientHeight;
+ 
+	  if (scrolled > coords) {
+		 goTopBtn.classList.add('back_to_top-show');
+	  }
+	  if (scrolled < coords) {
+		 goTopBtn.classList.remove('back_to_top-show');
+	  }
+	}
+ 
+	function backToTop() {
+	  if (window.pageYOffset > 0) {
+		 window.scrollBy(0, -80);
+		 setTimeout(backToTop, 0);
+	  }
+	}
+ 
+	let goTopBtn = document.querySelector('.back_to_top');
+ 
+	window.addEventListener('scroll', trackScroll);
+	goTopBtn.addEventListener('click', backToTop);
+ })();
+
