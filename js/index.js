@@ -5,21 +5,12 @@ displaySortedByPrice();
 displaySortedByAge();
 subscribtion();
 
+
 async function loadCatsData() {
   const response = await fetch("/data.json");
   const cats = await response.json();
   addInfoToArrays(cats);
-  //displayCatsInfo(cats)
 }
-
-// function createArray(cats, array, keyName) {
-// 	cats.forEach((elem)=>{
-// 		for(let key in elem){
-// 			if(key===keyName)
-// 			array.push(elem[key])
-// 		}
-// 	})
-// }
 
 function createCat(cats, array) {
   for (let key in cats) {
@@ -31,33 +22,11 @@ const allCats = [];
 const allCatsDefault = [];
 
 function addInfoToArrays(cats) {
-  // const catName = []
-  // const catColor = []
-  // const catAge = []
-  // const catPrice = []
-  // const catIsLiked = []
-  // const catOnSale = []
-  // const catSold = []
-  // const catImage = []
-
-  // createArray(cats, catName, "name")
-  // createArray(cats, catColor, "color")
-  // createArray(cats, catAge, "age")
-  // createArray(cats, catPrice, "price")
-  // createArray(cats, catIsLiked, "isLiked")
-  // createArray(cats, catOnSale, "onSale")
-  // createArray(cats, catSold, "isSold")
-  // createArray(cats, catImage, "image")
 
   createCat(cats, allCats);
   createCat(cats, allCatsDefault);
 
-  // const arrayOfCats = [catName, catColor, catAge, catPrice, catIsLiked, catSold, catImage]
-  //return catName, catColor, catAge, catPrice, catIsLiked, catSold, catImage
-  console.log(allCats);
-
   displayCatsInfo(allCats);
-  //sortCats(allCats)
   displayCatsAmount(allCats);
 }
 
@@ -142,7 +111,7 @@ function displayCatsInfo(allCats) {
 							</div>
 							<p class="item__price">${cat["price"]} руб.</p>
 						</div>
-						<a class="${cat["isSold"] === false ? "item__button" : "item__button sold"}">${
+						<a class="${cat["isSold"] === false ? "item__button" : "item__button sold"}" onclick="showToast()">${
       cat["isSold"] === false ? "Купить" : "Продано"
     }</a>
 					</div>
@@ -151,6 +120,12 @@ function displayCatsInfo(allCats) {
   }
 
   document.querySelector(".main__catalogue").innerHTML = out;
+}
+
+function showToast() {
+	let toast = document.querySelector('#cart')
+	toast.className='show'
+	setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
 }
 
 function validateEmail(email) {

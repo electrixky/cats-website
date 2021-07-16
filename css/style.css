@@ -254,37 +254,42 @@ html {
   margin: 1em 0;
 }
 
-.header__cart {
+#cart {
+  visibility: hidden;
   position: fixed;
   z-index: 500;
-  right: 150px;
+  right: 0;
   top: 120px;
   background-color: #6ebbd3;
   border-radius: 3px;
   padding: 10px;
-  -webkit-animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-@-webkit-keyframes slide-right {
+#cart.show {
+  visibility: visible;
+  -webkit-animation: slide-left 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+  animation: slide-left 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+}
+
+@-webkit-keyframes slide-left {
   0% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   100% {
-    -webkit-transform: translateX(100px);
-    transform: translateX(100px);
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
   }
 }
 
-@keyframes slide-right {
+@keyframes slide-left {
   0% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   100% {
-    -webkit-transform: translateX(100px);
-    transform: translateX(100px);
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
   }
 }
 
