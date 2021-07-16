@@ -1,70 +1,181 @@
-"use strict"
+"use strict";
 
-loadCatsData()
-
+loadCatsData();
+displaySortedByPrice();
+displaySortedByAge();
 
 async function loadCatsData() {
-	const response = await fetch('/data.json')
-	const cats = await response.json()
-	printCatsInfo(cats)
+  const response = await fetch("/data.json");
+  const cats = await response.json();
+  addInfoToArrays(cats);
+  //displayCatsInfo(cats)
 }
 
-function printCatsAmount(cats) {
-	document.querySelector('.header__main-title').textContent=`Найдено ${Object.keys(cats).length} котов`
+// function createArray(cats, array, keyName) {
+// 	cats.forEach((elem)=>{
+// 		for(let key in elem){
+// 			if(key===keyName)
+// 			array.push(elem[key])
+// 		}
+// 	})
+// }
+
+function createCat(cats, array) {
+  for (let key in cats) {
+    array.push(cats[key]);
+  }
 }
 
-function printCatsInfo(cats) {
+const allCats = [];
+const allCatsDefault = [];
 
-	printCatsAmount(cats)
+function addInfoToArrays(cats) {
+  // const catName = []
+  // const catColor = []
+  // const catAge = []
+  // const catPrice = []
+  // const catIsLiked = []
+  // const catOnSale = []
+  // const catSold = []
+  // const catImage = []
 
-	let out = ''
+  // createArray(cats, catName, "name")
+  // createArray(cats, catColor, "color")
+  // createArray(cats, catAge, "age")
+  // createArray(cats, catPrice, "price")
+  // createArray(cats, catIsLiked, "isLiked")
+  // createArray(cats, catOnSale, "onSale")
+  // createArray(cats, catSold, "isSold")
+  // createArray(cats, catImage, "image")
 
-	for (let key in cats) {
-		out+=`
-		<div class="item">
-					<div class="item__inner">
-						<div class="item__inner-photo">
-							<img src="${cats[key]['image']}">
-							<div class="item__inner-heart"></div>
-							<div class="item__inner-sale" data-sale="${cats[key]['onDiscount']}">
-								<span>-40%</span>
-							</div>
-						</div>
-						<div class="item__inner-content" data-id="${key}">
-							<h3 class="item__inner-title">${cats[key]['name']}</h3>
-							<div class="item__inner-decription">
-								<p class="color">${cats[key]['color']}<br>окрас</p>
-								<p class="age"><strong>${cats[key]['age']}</strong><br>Возраст</p>
-								<p class="paw"><strong>${cats[key]['paw']}</strong><br>Кол-во лап</p>
-							</div>
-							<p class="item__inner-price">${cats[key]['price']} руб.</p>
-						</div>
-						<a class="item__inner-button">Купить</a>
-					</div>
-				</div>
-		`
-		
+  createCat(cats, allCats);
+  createCat(cats, allCatsDefault);
+
+  // const arrayOfCats = [catName, catColor, catAge, catPrice, catIsLiked, catSold, catImage]
+  //return catName, catColor, catAge, catPrice, catIsLiked, catSold, catImage
+  console.log(allCats);
+
+  displayCatsInfo(allCats);
+  //sortCats(allCats)
+  displayCatsAmount(allCats);
+}
+
+function sortCatsByPrice(allCats) {
+  allCats.sort((a, b) =>
+    a["price"] > b["price"] ? 1 : b["price"] > a["price"] ? -1 : 0
+  );
+  displayCatsInfo(allCats);
+}
+
+function displaySortedByPrice() {
+  let sortByPriceClicked = 0;
+  document
+    .querySelector(".main__sort-price")
+    .addEventListener("click", function () {
+      if (sortByPriceClicked % 2 === 0) {
+        sortCatsByPrice(allCats)
+		  document.querySelector('.main__sort-price').innerHTML=`Цене
+		<i class="fas fa-chevron-up"></i>`
+      } else {
+        displayCatsInfo(allCatsDefault)
+		  document.querySelector('.main__sort-price').innerHTML=`Цене
+		<i class="fas fa-chevron-down"></i>`
+      }
+      sortByPriceClicked++;
+    });
 	}
 	
-	document.querySelector('.main__catalogue').innerHTML = out
-	//addDiscount()
-	
-	//addEventToButtons(cats)
+function sortCatsByAge(allCats) {
+  allCats.sort((a, b) =>
+	 a["age"] > b["age"] ? 1 : b["age"] > a["age"] ? -1 : 0
+  );
+  displayCatsInfo(allCats);
+}
 
-// 	const main = document.querySelector('main')
+function displaySortedByAge() {
+  let sortByAgeClicked = 0;
+  document
+    .querySelector(".main__sort-age")
+    .addEventListener("click", function () {
+      if (sortByAgeClicked % 2 === 0) {
+        sortCatsByAge(allCats);
+		  document.querySelector('.main__sort-age').innerHTML=`Возрасту
+		<i class="fas fa-chevron-up"></i>`
+      } else {
+        displayCatsInfo(allCatsDefault);
+		  document.querySelector('.main__sort-age').innerHTML=`Возрасту
+		<i class="fas fa-chevron-down"></i>`
+      }
+      sortByAgeClicked++;
+    });
+}
 
-// main.onclick = (event) => {
-// 	if(event.target.className === 'item__inner-button')
-// 	document.querySelector('.header__cart').style.visibility='visible'
+// function catLiked() {
+// 	for(let i=0; i<allCats.length; i++){
+// 		document.querySelectorAll('.item__heart')[i].classList.toggle('liked')
+// 	}
 // }
+
+function displayCatsAmount(allCats) {
+  document.querySelector(
+    ".header__main-title"
+  ).textContent = `Найдено ${allCats.length} котов`;
+}
+
+function displayCatsInfo(allCats) {
+  let out = "";
+
+  for (let cat of allCats) {
+    out += `
+		<div class="item">
+					<div class="item__inner">
+						<div class="item__photo">
+							<img src="${cat["image"]}">
+							<div class="${
+                cat["isLiked"] === true
+                  ? "item__heart liked"
+                  : "item__heart"
+              }" onclick="this.classList.toggle('liked')"></div>
+							<div class="${cat["onSale"] === true ? "item__sale" : ""}">
+								<span>${cat["onSale"] === true ? "-40%" : ""}</span>
+							</div>
+						</div>
+						<div class="item__content" data-id="${cat}">
+							<h3 class="item__title">${cat["name"]}</h3>
+							<div class="item__decription">
+								<p class="color">${cat["color"]}<br>окрас</p>
+								<p class="age"><strong>${cat["age"]} мес.</strong><br>Возраст</p>
+								<p class="paw"><strong>${cat["paw"]}</strong><br>Кол-во лап</p>
+							</div>
+							<p class="item__price">${cat["price"]} руб.</p>
+						</div>
+						<a class="${
+              cat["isSold"] === false
+                ? "item__button"
+                : "item__button sold"
+            }">${cat["isSold"] === false ? "Купить" : "Продано"}</a>
+					</div>
+				</div>
+		`;
+  }
+
+  document.querySelector(".main__catalogue").innerHTML = out;
+  //addDiscount()
+
+  //addEventToButtons(cats)
+
+  // 	const main = document.querySelector('main')
+
+  // main.onclick = (event) => {
+  // 	if(event.target.className === 'item__inner-button')
+  // 	document.querySelector('.header__cart').style.visibility='visible'
+  // }
 }
 
 // function addDiscount() {
 // 	let onSale = document.querySelectorAll("[data-sale]")
 // 	console.log(onSale)
 // }
-
-
 
 // function addEventToButtons(cats) {
 // 	for (let i = 0; i < cats.length; i++) {
@@ -86,31 +197,28 @@ function printCatsInfo(cats) {
 // 	loadMoreClicked++
 // })
 
+(function () {
+  function trackScroll() {
+    let scrolled = window.pageYOffset;
+    let coords = document.documentElement.clientHeight;
 
-(function() {
- 
-	function trackScroll() {
-	  let scrolled = window.pageYOffset;
-	  let coords = document.documentElement.clientHeight;
- 
-	  if (scrolled > coords) {
-		 goTopBtn.classList.add('back_to_top-show');
-	  }
-	  if (scrolled < coords) {
-		 goTopBtn.classList.remove('back_to_top-show');
-	  }
-	}
- 
-	function backToTop() {
-	  if (window.pageYOffset > 0) {
-		 window.scrollBy(0, -80);
-		 setTimeout(backToTop, 0);
-	  }
-	}
- 
-	let goTopBtn = document.querySelector('.back_to_top');
- 
-	window.addEventListener('scroll', trackScroll);
-	goTopBtn.addEventListener('click', backToTop);
- })();
+    if (scrolled > coords) {
+      goTopBtn.classList.add("back_to_top-show");
+    }
+    if (scrolled < coords) {
+      goTopBtn.classList.remove("back_to_top-show");
+    }
+  }
 
+  function backToTop() {
+    if (window.pageYOffset > 0) {
+      window.scrollBy(0, -80);
+      setTimeout(backToTop, 0);
+    }
+  }
+
+  let goTopBtn = document.querySelector(".back_to_top");
+
+  window.addEventListener("scroll", trackScroll);
+  goTopBtn.addEventListener("click", backToTop);
+})();
