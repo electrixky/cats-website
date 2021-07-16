@@ -3,6 +3,7 @@
 loadCatsData();
 displaySortedByPrice();
 displaySortedByAge();
+subscribtion();
 
 async function loadCatsData() {
   const response = await fetch("/data.json");
@@ -73,21 +74,21 @@ function displaySortedByPrice() {
     .querySelector(".main__sort-price")
     .addEventListener("click", function () {
       if (sortByPriceClicked % 2 === 0) {
-        sortCatsByPrice(allCats)
-		  document.querySelector('.main__sort-price').innerHTML=`Цене
-		<i class="fas fa-chevron-up"></i>`
+        sortCatsByPrice(allCats);
+        document.querySelector(".main__sort-price").innerHTML = `Цене
+		<i class="fas fa-chevron-up"></i>`;
       } else {
-        displayCatsInfo(allCatsDefault)
-		  document.querySelector('.main__sort-price').innerHTML=`Цене
-		<i class="fas fa-chevron-down"></i>`
+        displayCatsInfo(allCatsDefault);
+        document.querySelector(".main__sort-price").innerHTML = `Цене
+		<i class="fas fa-chevron-down"></i>`;
       }
       sortByPriceClicked++;
     });
-	}
-	
+}
+
 function sortCatsByAge(allCats) {
   allCats.sort((a, b) =>
-	 a["age"] > b["age"] ? 1 : b["age"] > a["age"] ? -1 : 0
+    a["age"] > b["age"] ? 1 : b["age"] > a["age"] ? -1 : 0
   );
   displayCatsInfo(allCats);
 }
@@ -99,22 +100,16 @@ function displaySortedByAge() {
     .addEventListener("click", function () {
       if (sortByAgeClicked % 2 === 0) {
         sortCatsByAge(allCats);
-		  document.querySelector('.main__sort-age').innerHTML=`Возрасту
-		<i class="fas fa-chevron-up"></i>`
+        document.querySelector(".main__sort-age").innerHTML = `Возрасту
+		<i class="fas fa-chevron-up"></i>`;
       } else {
         displayCatsInfo(allCatsDefault);
-		  document.querySelector('.main__sort-age').innerHTML=`Возрасту
-		<i class="fas fa-chevron-down"></i>`
+        document.querySelector(".main__sort-age").innerHTML = `Возрасту
+		<i class="fas fa-chevron-down"></i>`;
       }
       sortByAgeClicked++;
     });
 }
-
-// function catLiked() {
-// 	for(let i=0; i<allCats.length; i++){
-// 		document.querySelectorAll('.item__heart')[i].classList.toggle('liked')
-// 	}
-// }
 
 function displayCatsAmount(allCats) {
   document.querySelector(
@@ -132,9 +127,7 @@ function displayCatsInfo(allCats) {
 						<div class="item__photo">
 							<img src="${cat["image"]}">
 							<div class="${
-                cat["isLiked"] === true
-                  ? "item__heart liked"
-                  : "item__heart"
+                cat["isLiked"] === true ? "item__heart liked" : "item__heart"
               }" onclick="this.classList.toggle('liked')"></div>
 							<div class="${cat["onSale"] === true ? "item__sale" : ""}">
 								<span>${cat["onSale"] === true ? "-40%" : ""}</span>
@@ -149,53 +142,55 @@ function displayCatsInfo(allCats) {
 							</div>
 							<p class="item__price">${cat["price"]} руб.</p>
 						</div>
-						<a class="${
-              cat["isSold"] === false
-                ? "item__button"
-                : "item__button sold"
-            }">${cat["isSold"] === false ? "Купить" : "Продано"}</a>
+						<a class="${cat["isSold"] === false ? "item__button" : "item__button sold"}">${
+      cat["isSold"] === false ? "Купить" : "Продано"
+    }</a>
 					</div>
 				</div>
 		`;
   }
 
   document.querySelector(".main__catalogue").innerHTML = out;
-  //addDiscount()
-
-  //addEventToButtons(cats)
-
-  // 	const main = document.querySelector('main')
-
-  // main.onclick = (event) => {
-  // 	if(event.target.className === 'item__inner-button')
-  // 	document.querySelector('.header__cart').style.visibility='visible'
-  // }
 }
 
-// function addDiscount() {
-// 	let onSale = document.querySelectorAll("[data-sale]")
-// 	console.log(onSale)
-// }
+function validateEmail(email) {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  let checkedEmail = re.test(String(email).toLowerCase());
+  if (checkedEmail) {
+    subscribeModal();
+  } else {
+    console.log("Email is not correct");
+  }
+}
 
-// function addEventToButtons(cats) {
-// 	for (let i = 0; i < cats.length; i++) {
-// 		document.querySelectorAll('.item__inner-button').addEventListener('click', addToCart())
-// 	}
-// }
+function subscribtion() {
+  document
+    .querySelector(".promo__form-button")
+    .addEventListener("click", function (event) {
+      event.preventDefault();
+      let email = document.querySelector(".promo__form-email").value;
+      validateEmail(email);
+      document.querySelector(".promo__form-email").value = "";
+    });
+}
 
-// function addToCart() {
-// 	document.querySelector('#addToCart').style.visibility = "visible"
-// 	setTimeout(hideCartText, 2000);
-// }
-
-// function hideCartText() {
-// 	document.querySelector('#addToCart').style.visibility = "hidden"
-// }
-
-// let loadMoreClicked = 0
-// document.querySelector('.main__loadmore-button').addEventListener('click', function(){
-// 	loadMoreClicked++
-// })
+function subscribeModal() {
+  let modal = document.querySelector("#myModal");
+  let btn = document.querySelector(".promo__form-button");
+  let span = document.querySelector(".close");
+  btn.onclick = function () {
+    modal.style.display = "block";
+  };
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+}
 
 (function () {
   function trackScroll() {
