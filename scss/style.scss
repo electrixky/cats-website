@@ -1,11 +1,5 @@
 @import "nullstyle.scss";
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
 html {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 400;
@@ -20,22 +14,13 @@ html {
 
 .logo {
 	position: relative;
-	
+
 	&--reverse {
 		transform: rotateZ(180deg);
 		position: absolute;
 		right: -15px;
 	}
 }
-
-// .background {
-// 	background-color: rgba(31,32,33,.79);
-// 	position: absolute;
-// 	top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-// }
 
 .header {
 	background: center / cover no-repeat url(/assets/images/header_bg.png);
@@ -52,28 +37,41 @@ html {
 		margin-bottom: 3em;
 	}
 
-	&__top-menu {
+	&__menu {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		position: relative;
 	}
 
-	&__top-nav-items {
+	&__nav-items {
 		display: flex;
 	}
-	&__top-nav-item {
+
+	&__nav-item {
 		margin-left: 5em;
 	}
 
-	&__top-phone {
+	&__nav-link {
+		background-image: linear-gradient(#6ebbd3, currentColor);
+		background-position: 0% 100%;
+		background-repeat: no-repeat;
+		background-size: 0% 2px;
+		transition: background-size 0.3s;
+	}
+
+	&__nav-link:hover {
+		background-size: 100% 2px;
+	}
+
+	&__phone {
 		display: flex;
 		flex-direction: column;
 		align-content: flex-end;
 		align-items: flex-end;
 		justify-content: center;
 	}
-	&__top-phonenumber {
+	&__phone-number {
 		font-size: 1.5rem;
 		font-weight: 700;
 		margin-bottom: 5px;
@@ -85,37 +83,41 @@ html {
 	}
 }
 
-.header__cart {
-	//visibility: hidden;
+#cart {
+	visibility: hidden;
 	position: fixed;
 	z-index: 500;
-	right: 150px;
+	right: 0;
 	top: 120px;
 	background-color: #6ebbd3;
 	border-radius: 3px;
 	padding: 10px;
-	-webkit-animation: slide-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-@-webkit-keyframes slide-right {
+#cart.show {
+	visibility: visible;
+	-webkit-animation: slide-left 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+	        animation: slide-left 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+}
+
+@-webkit-keyframes slide-left {
 	0% {
 	  -webkit-transform: translateX(0);
 				 transform: translateX(0);
 	}
 	100% {
-	  -webkit-transform: translateX(100px);
-				 transform: translateX(100px);
+	  -webkit-transform: translateX(-100px);
+				 transform: translateX(-100px);
 	}
  }
- @keyframes slide-right {
+ @keyframes slide-left {
 	0% {
 	  -webkit-transform: translateX(0);
 				 transform: translateX(0);
 	}
 	100% {
-	  -webkit-transform: translateX(100px);
-				 transform: translateX(100px);
+	  -webkit-transform: translateX(-100px);
+				 transform: translateX(-100px);
 	}
  }
 
@@ -132,8 +134,10 @@ html {
 		margin-right: 2em;
 	}
 
-	&__sort-price {
+	&__sort-price,
+	&__sort-age {
 		margin-right: 2em;
+		cursor: pointer;
 	}
 }
 
@@ -151,24 +155,24 @@ html {
 		overflow: hidden;
 	}
 
-	&__inner-photo {
+	&__photo {
 		position: relative;
 	}
 
-	&__inner-photo img {
+	&__photo img {
 		width: 100%;
 		overflow: hidden;
 		-webkit-transition: all 1s ease;
-      -moz-transition: all 1s ease;
-      -ms-transition: all 1s ease;
-      transition: all 1s ease;
+		-moz-transition: all 1s ease;
+		-ms-transition: all 1s ease;
+		transition: all 1s ease;
 	}
 
-	&__inner-photo img:hover {
+	&__photo img:hover {
 		transform: scale(1.2);
 	}
 
-	&__inner-heart {
+	&__heart {
 		position: absolute;
 		top: 36px;
 		right: 32px;
@@ -179,9 +183,12 @@ html {
 		cursor: pointer;
 	}
 
-	&__inner-sale {
+	.liked {
+		opacity: 1;
+	}
+
+	&__sale {
 		display: flex;
-		display: none;
 		position: absolute;
 		top: 34px;
 		left: 38px;
@@ -193,24 +200,24 @@ html {
 		border-radius: 10px;
 	}
 
-	&__inner-sale span {
+	&__sale span {
 		color: #fff;
 		font-size: 1rem;
 		line-height: 1.25rem;
 	}
 
-	&__inner-content {
+	&__content {
 		padding: 2em;
 		background: #f3f3f3;
 		z-index: 2;
 	}
 
-	&__inner-title {
+	&__title {
 		font-size: 1.5rem;
 		font-weight: 700;
 	}
 
-	&__inner-decription {
+	&__decription {
 		position: relative;
 		display: flex;
 		justify-content: space-evenly;
@@ -220,12 +227,12 @@ html {
 		line-height: 1.3em;
 	}
 
-	&__inner-decription strong {
+	&__decription strong {
 		font-size: 1rem;
 		font-weight: 700;
 	}
 
-	&__inner-description:before {
+	&__description:before {
 		position: absolute;
 		content: "";
 		width: 4px;
@@ -234,13 +241,13 @@ html {
 		background-color: #6ebbd3;
 	}
 
-	&__inner-price {
+	&__price {
 		font-size: 1.5rem;
 		font-weight: 700;
 		line-height: 30px;
 	}
 
-	&__inner-button {
+	&__button {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -330,6 +337,13 @@ html {
 	}
 }
 
+input:checked + label:before {
+	background-color: #6ebbd3;
+	background-image: url(/assets/images/checkbox.svg);
+	background-position: 50%;
+	background-repeat: no-repeat;
+}
+
 .main__loadmore {
 	margin-bottom: 3em;
 
@@ -353,7 +367,6 @@ html {
 	}
 }
 
-
 .back_to_top {
 	position: fixed;
 	bottom: 80px;
@@ -368,14 +381,73 @@ html {
 	cursor: pointer;
 	border-radius: 2px;
 	display: none;
-	transition: .2s;
+	transition: 0.2s;
 	padding: 10px;
- }
- 
- .back_to_top:hover {
+}
+
+.back_to_top:hover {
 	background: #5f93a3;
- }
- 
- .back_to_top-show {
+}
+
+.back_to_top-show {
 	display: block;
+}
+
+.sold {
+	background-color: #1f2021;
+	cursor: default;
+}
+
+.checked {
+	background-color: #6ebbd3;
+	background-image: url(assets/images/checkbox.svg);
+	background-position: 50%;
+	background-repeat: no-repeat;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 999999999;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+	color: #000;
+	text-align: center;
+	font-weight: 600;
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	padding: 5em;
+}
+
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 1060px) {
+	.main__catalogue {
+		grid-template-columns: repeat(2, 1fr);
+	}
  }

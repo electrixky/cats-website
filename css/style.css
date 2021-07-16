@@ -1,3 +1,8 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 html,
 body,
 div,
@@ -134,13 +139,6 @@ table {
   border-spacing: 0;
 }
 
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 html {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
@@ -189,7 +187,7 @@ html {
   margin-bottom: 3em;
 }
 
-.header__top-menu {
+.header__menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -202,17 +200,31 @@ html {
   position: relative;
 }
 
-.header__top-nav-items {
+.header__nav-items {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.header__top-nav-item {
+.header__nav-item {
   margin-left: 5em;
 }
 
-.header__top-phone {
+.header__nav-link {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#6ebbd3), to(currentColor));
+  background-image: linear-gradient(#6ebbd3, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  -webkit-transition: background-size 0.3s;
+  transition: background-size 0.3s;
+}
+
+.header__nav-link:hover {
+  background-size: 100% 2px;
+}
+
+.header__phone {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -230,7 +242,7 @@ html {
           justify-content: center;
 }
 
-.header__top-phonenumber {
+.header__phone-number {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 5px;
@@ -242,37 +254,42 @@ html {
   margin: 1em 0;
 }
 
-.header__cart {
+#cart {
+  visibility: hidden;
   position: fixed;
   z-index: 500;
-  right: 150px;
+  right: 0;
   top: 120px;
   background-color: #6ebbd3;
   border-radius: 3px;
   padding: 10px;
-  -webkit-animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-@-webkit-keyframes slide-right {
+#cart.show {
+  visibility: visible;
+  -webkit-animation: slide-left 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+  animation: slide-left 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+}
+
+@-webkit-keyframes slide-left {
   0% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   100% {
-    -webkit-transform: translateX(100px);
-    transform: translateX(100px);
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
   }
 }
 
-@keyframes slide-right {
+@keyframes slide-left {
   0% {
     -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   100% {
-    -webkit-transform: translateX(100px);
-    transform: translateX(100px);
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
   }
 }
 
@@ -292,8 +309,9 @@ html {
   margin-right: 2em;
 }
 
-.main__sort-price {
+.main__sort-price, .main__sort-age {
   margin-right: 2em;
+  cursor: pointer;
 }
 
 .main__catalogue {
@@ -316,23 +334,23 @@ html {
   overflow: hidden;
 }
 
-.item__inner-photo {
+.item__photo {
   position: relative;
 }
 
-.item__inner-photo img {
+.item__photo img {
   width: 100%;
   overflow: hidden;
   -webkit-transition: all 1s ease;
   transition: all 1s ease;
 }
 
-.item__inner-photo img:hover {
+.item__photo img:hover {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }
 
-.item__inner-heart {
+.item__heart {
   position: absolute;
   top: 36px;
   right: 32px;
@@ -343,11 +361,14 @@ html {
   cursor: pointer;
 }
 
-.item__inner-sale {
+.item .liked {
+  opacity: 1;
+}
+
+.item__sale {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  display: none;
   position: absolute;
   top: 34px;
   left: 38px;
@@ -363,24 +384,24 @@ html {
   border-radius: 10px;
 }
 
-.item__inner-sale span {
+.item__sale span {
   color: #fff;
   font-size: 1rem;
   line-height: 1.25rem;
 }
 
-.item__inner-content {
+.item__content {
   padding: 2em;
   background: #f3f3f3;
   z-index: 2;
 }
 
-.item__inner-title {
+.item__title {
   font-size: 1.5rem;
   font-weight: 700;
 }
 
-.item__inner-decription {
+.item__decription {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -394,12 +415,12 @@ html {
   line-height: 1.3em;
 }
 
-.item__inner-decription strong {
+.item__decription strong {
   font-size: 1rem;
   font-weight: 700;
 }
 
-.item__inner-description:before {
+.item__description:before {
   position: absolute;
   content: "";
   width: 4px;
@@ -408,13 +429,13 @@ html {
   background-color: #6ebbd3;
 }
 
-.item__inner-price {
+.item__price {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 30px;
 }
 
-.item__inner-button {
+.item__button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -521,6 +542,13 @@ html {
   margin-right: 18px;
 }
 
+input:checked + label:before {
+  background-color: #6ebbd3;
+  background-image: url(/assets/images/checkbox.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
 .main__loadmore {
   margin-bottom: 3em;
 }
@@ -566,8 +594,8 @@ html {
   cursor: pointer;
   border-radius: 2px;
   display: none;
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
   padding: 10px;
 }
 
@@ -577,4 +605,62 @@ html {
 
 .back_to_top-show {
   display: block;
+}
+
+.sold {
+  background-color: #1f2021;
+  cursor: default;
+}
+
+.checked {
+  background-color: #6ebbd3;
+  background-image: url(assets/images/checkbox.svg);
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999999999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  color: #000;
+  text-align: center;
+  font-weight: 600;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  padding: 5em;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1060px) {
+  .main__catalogue {
+    -ms-grid-columns: (1fr)[2];
+        grid-template-columns: repeat(2, 1fr);
+  }
 }
