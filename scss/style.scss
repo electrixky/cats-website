@@ -443,3 +443,11 @@ input:checked + label:before {
 	text-decoration: none;
 	cursor: pointer;
 }
+
+
+
+@media only screen and (max-width: 1060px) {
+	.main__catalogue {
+		grid-template-columns: repeat(2, 1fr);
+	}
+ }
