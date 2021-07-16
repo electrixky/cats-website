@@ -1,15 +1,17 @@
 "use strict";
 
-loadCatsData();
-displaySortedByPrice();
-displaySortedByAge();
-subscribtion();
+loadCatsData()
+displaySortedByPrice()
+displaySortedByAge()
+subscribtion()
 
+
+const CATS_PER_PAGE = 6
 
 async function loadCatsData() {
-  const response = await fetch("/data.json");
-  const cats = await response.json();
-  addInfoToArrays(cats);
+  const response = await fetch("/data.json")
+  const cats = await response.json()
+  addInfoToArrays(cats)
 }
 
 function createCat(cats, array) {
@@ -86,37 +88,39 @@ function displayCatsAmount(allCats) {
   ).textContent = `Найдено ${allCats.length} котов`;
 }
 
+let displayableCount = 0
+
 function displayCatsInfo(allCats) {
   let out = "";
 
   for (let cat of allCats) {
-    out += `
-		<div class="item">
-					<div class="item__inner">
-						<div class="item__photo">
-							<img src="${cat["image"]}">
-							<div class="${
-                cat["isLiked"] === true ? "item__heart liked" : "item__heart"
-              }" onclick="this.classList.toggle('liked')"></div>
-							<div class="${cat["onSale"] === true ? "item__sale" : ""}">
-								<span>${cat["onSale"] === true ? "-40%" : ""}</span>
+		 out += `
+			<div class="item">
+						<div class="item__inner">
+							<div class="item__photo">
+								<img src="${cat["image"]}">
+								<div class="${
+						 cat["isLiked"] === true ? "item__heart liked" : "item__heart"
+					  }" onclick="this.classList.toggle('liked')"></div>
+								<div class="${cat["onSale"] === true ? "item__sale" : ""}">
+									<span>${cat["onSale"] === true ? "-40%" : ""}</span>
+								</div>
 							</div>
-						</div>
-						<div class="item__content" data-id="${cat}">
-							<h3 class="item__title">${cat["name"]}</h3>
-							<div class="item__decription">
-								<p class="color">${cat["color"]}<br>окрас</p>
-								<p class="age"><strong>${cat["age"]} мес.</strong><br>Возраст</p>
-								<p class="paw"><strong>${cat["paw"]}</strong><br>Кол-во лап</p>
+							<div class="item__content" data-id="${cat}">
+								<h3 class="item__title">${cat["name"]}</h3>
+								<div class="item__decription">
+									<p class="color">${cat["color"]}<br>окрас</p>
+									<p class="age"><strong>${cat["age"]} мес.</strong><br>Возраст</p>
+									<p class="paw"><strong>${cat["paw"]}</strong><br>Кол-во лап</p>
+								</div>
+								<p class="item__price">${cat["price"]} руб.</p>
 							</div>
-							<p class="item__price">${cat["price"]} руб.</p>
+							<a class="${cat["isSold"] === false ? "item__button" : "item__button sold"}" onclick="showToast()">${
+			cat["isSold"] === false ? "Купить" : "Продано"
+		 }</a>
 						</div>
-						<a class="${cat["isSold"] === false ? "item__button" : "item__button sold"}" onclick="showToast()">${
-      cat["isSold"] === false ? "Купить" : "Продано"
-    }</a>
 					</div>
-				</div>
-		`;
+			`;
   }
 
   document.querySelector(".main__catalogue").innerHTML = out;
