@@ -215,13 +215,14 @@ html {
   background-image: linear-gradient(#6ebbd3, currentColor);
   background-position: 0% 100%;
   background-repeat: no-repeat;
-  background-size: 0% 2px;
-  -webkit-transition: background-size 0.3s;
-  transition: background-size 0.3s;
+  background-size: 0% 1px;
+  -webkit-transition: background-size 0.2s;
+  transition: background-size 0.2s;
 }
 
 .header__nav-link:hover {
-  background-size: 100% 2px;
+  background-size: 100% 1px;
+  color: #6ebbd3;
 }
 
 .header__phone {
@@ -312,6 +313,12 @@ html {
 .main__sort-price, .main__sort-age {
   margin-right: 2em;
   cursor: pointer;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+.main__sort-price:hover, .main__sort-age:hover {
+  color: #585858;
 }
 
 .main__catalogue {
@@ -674,8 +681,76 @@ input:checked + label:before {
 }
 
 @media only screen and (max-width: 1060px) {
+  .container {
+    width: 95%;
+  }
   .main__catalogue {
     -ms-grid-columns: (1fr)[2];
         grid-template-columns: repeat(2, 1fr);
+  }
+  .header__main-title {
+    margin: 1em 2em;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .header__nav-item {
+    margin-left: 3em;
+  }
+  .header {
+    padding: 1em 0;
+  }
+  .item__content {
+    padding: 1.5em;
+  }
+  .promo__inner {
+    padding: 2em;
+  }
+  .promo__form-email {
+    width: 20em;
+  }
+  .promo__text-subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 967px) {
+  .promo__form-button {
+    width: 15em;
+  }
+  .promo__form-email {
+    width: 15em;
+  }
+  .promo__text-title {
+    font-size: 2rem;
+    line-height: 30px;
+  }
+  .promo__text-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .header__top {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-bottom: -2em;
+  }
+  .header__menu {
+    margin-bottom: 1em;
+  }
+  .header__main-title {
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .header__main-title {
+    font-size: 1.5em;
+  }
+  .header__phone-number {
+    font-size: 1.2rem;
   }
 }
