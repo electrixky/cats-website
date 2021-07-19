@@ -498,6 +498,21 @@ html {
   margin-right: 16px;
 }
 
+.promo__form-input {
+  position: relative;
+  display: inline-block;
+}
+
+.promo #invalidEmail {
+  display: none;
+  position: absolute;
+  right: 50px;
+  top: 73px;
+  font-size: 14px;
+  font-weight: 600;
+  color: red;
+}
+
 .promo__form-button {
   width: 20em;
   height: 5em;

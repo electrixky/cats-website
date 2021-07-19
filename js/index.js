@@ -3,7 +3,6 @@
 loadCatsData()
 displaySortedByPrice()
 displaySortedByAge()
-subscribtion()
 
 
 const CATS_PER_PAGE = 6
@@ -132,43 +131,45 @@ function showToast() {
 	setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
 }
 
-function validateEmail(email) {
-  const re =
+function isValid(email) {
+  	const regex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  let checkedEmail = re.test(String(email).toLowerCase());
-  if (checkedEmail) {
-    subscribeModal();
-  } else {
-    console.log("Email is not correct");
-  }
+  	let checkedEmail = regex.test(String(email).toLowerCase());
+	return checkedEmail
 }
 
-function subscribtion() {
-  document
-    .querySelector(".promo__form-button")
-    .addEventListener("click", function (event) {
-      event.preventDefault();
-      let email = document.querySelector(".promo__form-email").value;
-      validateEmail(email);
-      document.querySelector(".promo__form-email").value = "";
-    });
-}
+let subscribeModal = document.querySelector("#subscribeModal");
+let subscribeBtn = document.querySelector(".promo__form-button");
+let closeModalBtn = document.querySelector(".close");
+let userEmailForm = document.querySelector(".promo__form-email");
+let invalidEmail = document.querySelector("#invalidEmail");
 
-function subscribeModal() {
-  let modal = document.querySelector("#myModal");
-  let btn = document.querySelector(".promo__form-button");
-  let span = document.querySelector(".close");
-  btn.onclick = function () {
-    modal.style.display = "block";
-  };
-  span.onclick = function () {
-    modal.style.display = "none";
-  };
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
+subscribeBtn.addEventListener('click', function (event) {
+	event.preventDefault()
+
+	if(isValid(userEmailForm.value)) {
+		showSubscribeModal()
+		userEmailForm.value = ''
+		invalidEmail.style.display = 'none'
+		userEmailForm.style.border = 'none'
+	} else {
+		invalidEmail.style.display = 'inline'
+		userEmailForm.style.border = '3px solid rgb(255, 0, 0)'
+	}
+ });
+
+closeModalBtn.addEventListener('click', function(){
+	subscribeModal.style.display = "none";
+})
+
+window.addEventListener('click', function (event) {
+	if (event.target == subscribeModal) {
+	 subscribeModal.style.display = "none";
+	}
+ }) 
+
+function showSubscribeModal() {
+	subscribeModal.style.display = "block";
 }
 
 (function () {

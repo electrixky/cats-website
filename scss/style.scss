@@ -298,6 +298,21 @@ html {
 		margin-right: 16px;
 	}
 
+	&__form-input {
+		position: relative;
+		display: inline-block;
+	}
+
+	#invalidEmail {
+		display: none;
+		position: absolute;
+		right: 50px;
+		top: 73px;
+		font-size: 14px;
+		font-weight: 600;
+		color: rgb(255, 0, 0);
+	}
+
 	&__form-button {
 		width: 20em;
 		height: 5em;
@@ -446,8 +461,10 @@ input:checked + label:before {
 
 
 
+
 @media only screen and (max-width: 1060px) {
 	.main__catalogue {
 		grid-template-columns: repeat(2, 1fr);
 	}
  }
+

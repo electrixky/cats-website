@@ -78,12 +78,15 @@
 			</div>
 			<div class="promo__form">
 				<form action="">
-					<input type="email" class="promo__form-email" placeholder="Email">
+					<div class="promo__form-input">
+						<input type="email" class="promo__form-email" placeholder="Email">
+						<span id="invalidEmail">Invalid email</span>
+					</div>
 					<input type="submit" class="promo__form-button" value="Подписаться">
 					<div class="promo__form-checkbox">
 						<input type="checkbox" id="subscribe">
 						<label for="subscribe">Подписаться на новости</label>
-						<div id="myModal" class="modal">
+						<div id="subscribeModal" class="modal">
 							<div class="modal-content">
 							  <span class="close">&times;</span>
 							  <p>Спасибо за подписку!</p>
