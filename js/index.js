@@ -31,7 +31,11 @@ sortByPriceAscending.addEventListener("click", sortPriceUp);
 sortByPriceDescending.addEventListener("click", sortPriceDown);
 sortByAgeAscending.addEventListener("click", sortAgeUp);
 sortByAgeDescending.addEventListener("click", sortAgeDown);
+loadmoreBtn.addEventListener("click", loadMoreCats);
 resetBtn.addEventListener("click", resetCats);
+subscribeBtn.addEventListener("click", subscribtion);
+closeModalBtn.addEventListener("click", closeSubscribeModal);
+window.addEventListener("click", closeModalBackground);
 
 async function loadCatsData() {
   const response = await fetch("/data.json");
@@ -84,17 +88,17 @@ function showCatsInfo(cats, startShowCats = 0) {
   mainCatalogue.innerHTML += catsOutput;
 }
 
-loadmoreBtn.addEventListener("click", function () {
-  startShowCats += CATS_PER_PAGE;
-  showCatsInfo(cats, startShowCats);
-  loadmoreBtn.textContent = `Показать еще ${
-    cats.length - CATS_PER_PAGE - startShowCats
-  }`;
-
-  if (startShowCats === cats.length - CATS_PER_PAGE) {
-    loadmoreBtn.style.display = "none";
-  }
-});
+function loadMoreCats() {
+	startShowCats += CATS_PER_PAGE;
+	showCatsInfo(cats, startShowCats);
+	loadmoreBtn.textContent = `Показать еще ${
+	  cats.length - CATS_PER_PAGE - startShowCats
+	}`;
+ 
+	if (startShowCats === cats.length - CATS_PER_PAGE) {
+	  loadmoreBtn.style.display = "none";
+	}
+ }
 
 function showCatsAmount(cats) {
   catsAmountTitle.textContent = `Найдено ${cats.length} котов`;
@@ -189,32 +193,32 @@ function isValid(email) {
   return checkedEmail;
 }
 
-subscribeBtn.addEventListener("click", function (event) {
-  event.preventDefault();
+function subscribtion(event) {
+	event.preventDefault();
+ 
+	if (isValid(userEmailForm.value)) {
+	  showSubscribeModal();
+	  userEmailForm.value = "";
+	  invalidEmail.style.display = "none";
+	  userEmailForm.style.border = "none";
+	} else {
+	  invalidEmail.style.display = "inline";
+	  userEmailForm.style.border = "3px solid rgb(255, 0, 0)";
+	}
+ }
 
-  if (isValid(userEmailForm.value)) {
-    showSubscribeModal();
-    userEmailForm.value = "";
-    invalidEmail.style.display = "none";
-    userEmailForm.style.border = "none";
-  } else {
-    invalidEmail.style.display = "inline";
-    userEmailForm.style.border = "3px solid rgb(255, 0, 0)";
-  }
-});
+ function showSubscribeModal() {
+	subscribeModal.style.display = "block";
+ }
 
-closeModalBtn.addEventListener("click", function () {
-  subscribeModal.style.display = "none";
-});
+function closeSubscribeModal() {
+	subscribeModal.style.display = "none";
+ }
 
-window.addEventListener("click", function (event) {
-  if (event.target == subscribeModal) {
-    subscribeModal.style.display = "none";
-  }
-});
-
-function showSubscribeModal() {
-  subscribeModal.style.display = "block";
+function closeModalBackground(event) {
+	if (event.target == subscribeModal) {
+	  subscribeModal.style.display = "none";
+	}
 }
 
 (function () {
