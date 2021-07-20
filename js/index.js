@@ -1,122 +1,73 @@
 "use strict";
 
-loadCatsData()
-displaySortedByPrice()
-displaySortedByAge()
+let catsAmountTitle = document.querySelector(".header__main-title");
+let subscribeModal = document.querySelector("#subscribeModal");
+let subscribeBtn = document.querySelector(".promo__form-button");
+let closeModalBtn = document.querySelector(".close");
+let userEmailForm = document.querySelector(".promo__form-email");
+let invalidEmail = document.querySelector("#invalidEmail");
+let toast = document.querySelector("#cart");
+let arrowPrice = document.querySelector(".arrow--price");
+let arrowAge = document.querySelector(".arrow--age");
+let sortByPrice = document.querySelector(".main__sort-price");
+let sortByPriceAscending = document.querySelector("#sortByPriceAscending");
+let sortByPriceDescending = document.querySelector("#sortByPriceDescending");
+let sortByAgeAscending = document.querySelector("#sortByAgeAscending");
+let sortByAgeDescending = document.querySelector("#sortByAgeDescending");
+let sortByAge = document.querySelector(".main__sort-age");
+let resetBtn = document.querySelector("#reset");
 
+const CATS_PER_PAGE = 6;
+let cats = [];
+let displayableCount = CATS_PER_PAGE;
+let sortedByPriceAscending = false;
+let sortedByAge = false;
 
-const CATS_PER_PAGE = 6
 
 async function loadCatsData() {
-  const response = await fetch("/data.json")
-  const cats = await response.json()
-  addInfoToArrays(cats)
+  const response = await fetch("/data.json");
+  const res = await response.json();
+  cats = res;
+  showCats(cats);
 }
 
-function createCat(cats, array) {
-  for (let key in cats) {
-    array.push(cats[key]);
-  }
+function showCats(cats) {
+  showCatsInfo(cats);
+  showCatsAmount(cats);
 }
 
-const allCats = [];
-const allCatsDefault = [];
-
-function addInfoToArrays(cats) {
-
-  createCat(cats, allCats);
-  createCat(cats, allCatsDefault);
-
-  displayCatsInfo(allCats);
-  displayCatsAmount(allCats);
-}
-
-function sortCatsByPrice(allCats) {
-  allCats.sort((a, b) =>
-    a["price"] > b["price"] ? 1 : b["price"] > a["price"] ? -1 : 0
-  );
-  displayCatsInfo(allCats);
-}
-
-function displaySortedByPrice() {
-  let sortByPriceClicked = 0;
-  document
-    .querySelector(".main__sort-price")
-    .addEventListener("click", function () {
-      if (sortByPriceClicked % 2 === 0) {
-        sortCatsByPrice(allCats);
-        document.querySelector(".main__sort-price").innerHTML = `Цене
-		<i class="fas fa-chevron-up"></i>`;
-      } else {
-        displayCatsInfo(allCatsDefault);
-        document.querySelector(".main__sort-price").innerHTML = `Цене
-		<i class="fas fa-chevron-down"></i>`;
-      }
-      sortByPriceClicked++;
-    });
-}
-
-function sortCatsByAge(allCats) {
-  allCats.sort((a, b) =>
-    a["age"] > b["age"] ? 1 : b["age"] > a["age"] ? -1 : 0
-  );
-  displayCatsInfo(allCats);
-}
-
-function displaySortedByAge() {
-  let sortByAgeClicked = 0;
-  document
-    .querySelector(".main__sort-age")
-    .addEventListener("click", function () {
-      if (sortByAgeClicked % 2 === 0) {
-        sortCatsByAge(allCats);
-        document.querySelector(".main__sort-age").innerHTML = `Возрасту
-		<i class="fas fa-chevron-up"></i>`;
-      } else {
-        displayCatsInfo(allCatsDefault);
-        document.querySelector(".main__sort-age").innerHTML = `Возрасту
-		<i class="fas fa-chevron-down"></i>`;
-      }
-      sortByAgeClicked++;
-    });
-}
-
-function displayCatsAmount(allCats) {
-  document.querySelector(
-    ".header__main-title"
-  ).textContent = `Найдено ${allCats.length} котов`;
-}
-
-let displayableCount = 0
-
-function displayCatsInfo(allCats) {
+function showCatsInfo(cats) {
   let out = "";
 
-  for (let cat of allCats) {
-		 out += `
+  for (let i = 0; i < displayableCount; i++) {
+    out += `
 			<div class="item">
 						<div class="item__inner">
 							<div class="item__photo">
-								<img src="${cat["image"]}">
+								<img src="${cats[i]["image"]}">
 								<div class="${
-						 cat["isLiked"] === true ? "item__heart liked" : "item__heart"
-					  }" onclick="this.classList.toggle('liked')"></div>
-								<div class="${cat["onSale"] === true ? "item__sale" : ""}">
-									<span>${cat["onSale"] === true ? "-40%" : ""}</span>
+                  cats[i]["isLiked"] === true
+                    ? "item__heart liked"
+                    : "item__heart"
+                }" onclick="this.classList.toggle('liked'); showToast()"></div>
+								<div class="${cats[i]["onSale"] === true ? "item__sale" : ""}">
+									<span>${cats[i]["onSale"] === true ? "-40%" : ""}</span>
 								</div>
 							</div>
-							<div class="item__content" data-id="${cat}">
-								<h3 class="item__title">${cat["name"]}</h3>
+							<div class="item__content">
+								<h3 class="item__title">${cats[i]["name"]}</h3>
 								<div class="item__decription">
-									<p class="color">${cat["color"]}<br>окрас</p>
-									<p class="age"><strong>${cat["age"]} мес.</strong><br>Возраст</p>
-									<p class="paw"><strong>${cat["paw"]}</strong><br>Кол-во лап</p>
+									<p class="color">${cats[i]["color"]}<br>окрас</p>
+									<p class="age"><strong>${cats[i]["age"]} мес.</strong><br>Возраст</p>
+									<p class="paw"><strong>${cats[i]["paw"]}</strong><br>Кол-во лап</p>
 								</div>
-								<p class="item__price">${cat["price"]} руб.</p>
+								<p class="item__price">${cats[i]["price"]} руб.</p>
 							</div>
-							<a class="${cat["isSold"] === false ? "item__button" : "item__button sold"}" onclick="showToast()">${
-			cat["isSold"] === false ? "Купить" : "Продано"
-		 }</a>
+							<a class="${
+                cats[i]["isSold"] === false
+                  ? "item__button"
+                  : "item__button sold"
+              }">${cats[i]["isSold"] === false ? "Купить" : "Продано"}</a>
 						</div>
 					</div>
 			`;
@@ -125,51 +76,117 @@ function displayCatsInfo(allCats) {
   document.querySelector(".main__catalogue").innerHTML = out;
 }
 
+function showCatsAmount(cats) {
+  catsAmountTitle.textContent = `Найдено ${cats.length} котов`;
+}
+
+function sortCats(cats, criteria, order) {
+  if (order === "ascending") {
+    cats.sort((a, b) =>
+      a[criteria] > b[criteria] ? 1 : b[criteria] > a[criteria] ? -1 : 0
+    );
+  } else {
+    cats.sort((b, a) =>
+      a[criteria] > b[criteria] ? 1 : b[criteria] > a[criteria] ? -1 : 0
+    );
+  }
+  showCatsInfo(cats);
+}
+
+sortByPriceAscending.addEventListener("click", function () {
+  let catsCopy = JSON.parse(JSON.stringify(cats));
+  sortByPrice.classList.add("blue-text")
+  resetBtn.style.visibility = "visible"
+
+    sortCats(catsCopy, "price", "ascending");
+    //sortedByPriceAscending = true;
+		 arrowPrice.classList.add("transform");
+});
+
+sortByPriceDescending.addEventListener("click", function () {
+	let catsCopy = JSON.parse(JSON.stringify(cats));
+	sortByPrice.classList.add("blue-text")
+  resetBtn.style.visibility = "visible"
+ 
+	arrowPrice.classList.remove("transform");
+	  sortCats(catsCopy, "price", "descending");
+	  //sortedByPriceAscending = false;
+ });
+
+sortByAgeAscending.addEventListener("click", function () {
+	let catsCopy = JSON.parse(JSON.stringify(cats));
+	sortByAge.classList.add("blue-text")
+  resetBtn.style.visibility = "visible"
+
+	  sortCats(catsCopy, "age", "ascending");
+	  arrowAge.classList.add("transform");
+	  //sortedByAge = true;
+ });
+
+ sortByAgeDescending.addEventListener("click", function () {
+	let catsCopy = JSON.parse(JSON.stringify(cats));
+	sortByAge.classList.add("blue-text")
+  resetBtn.style.visibility = "visible"
+ 
+	  sortCats(catsCopy, "age", "descending");
+	  arrowAge.classList.remove("transform");
+	  //sortedByAge = true;
+ });
+
+ resetBtn.addEventListener("click", function() {
+	showCatsInfo(cats);
+	resetBtn.style.visibility = "hidden"
+	sortByAge.classList.remove("blue-text")
+	sortByPrice.classList.remove("blue-text")
+	arrowAge.classList.remove("transform");
+	arrowPrice.classList.remove("transform");
+ })
+
 function showToast() {
-	let toast = document.querySelector('#cart')
-	toast.className='show'
-	setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+  toast.classList = "show";
+
+  let timerId = setInterval(function () {
+    toast.classList.toggle("show");
+  }, 3000);
+
+  setTimeout(() => {
+    clearInterval(timerId);
+  }, 3000);
 }
 
 function isValid(email) {
-  	const regex =
+  const regex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  	let checkedEmail = regex.test(String(email).toLowerCase());
-	return checkedEmail
+  let checkedEmail = regex.test(String(email).toLowerCase());
+  return checkedEmail;
 }
 
-let subscribeModal = document.querySelector("#subscribeModal");
-let subscribeBtn = document.querySelector(".promo__form-button");
-let closeModalBtn = document.querySelector(".close");
-let userEmailForm = document.querySelector(".promo__form-email");
-let invalidEmail = document.querySelector("#invalidEmail");
+subscribeBtn.addEventListener("click", function (event) {
+  event.preventDefault();
 
-subscribeBtn.addEventListener('click', function (event) {
-	event.preventDefault()
+  if (isValid(userEmailForm.value)) {
+    showSubscribeModal();
+    userEmailForm.value = "";
+    invalidEmail.style.display = "none";
+    userEmailForm.style.border = "none";
+  } else {
+    invalidEmail.style.display = "inline";
+    userEmailForm.style.border = "3px solid rgb(255, 0, 0)";
+  }
+});
 
-	if(isValid(userEmailForm.value)) {
-		showSubscribeModal()
-		userEmailForm.value = ''
-		invalidEmail.style.display = 'none'
-		userEmailForm.style.border = 'none'
-	} else {
-		invalidEmail.style.display = 'inline'
-		userEmailForm.style.border = '3px solid rgb(255, 0, 0)'
-	}
- });
+closeModalBtn.addEventListener("click", function () {
+  subscribeModal.style.display = "none";
+});
 
-closeModalBtn.addEventListener('click', function(){
-	subscribeModal.style.display = "none";
-})
-
-window.addEventListener('click', function (event) {
-	if (event.target == subscribeModal) {
-	 subscribeModal.style.display = "none";
-	}
- }) 
+window.addEventListener("click", function (event) {
+  if (event.target == subscribeModal) {
+    subscribeModal.style.display = "none";
+  }
+});
 
 function showSubscribeModal() {
-	subscribeModal.style.display = "block";
+  subscribeModal.style.display = "block";
 }
 
 (function () {
@@ -197,3 +214,5 @@ function showSubscribeModal() {
   window.addEventListener("scroll", trackScroll);
   goTopBtn.addEventListener("click", backToTop);
 })();
+
+loadCatsData();

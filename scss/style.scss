@@ -1,9 +1,10 @@
 @import "nullstyle.scss";
 
+
 html {
 	font-family: "Montserrat", sans-serif;
-	font-weight: 400;
 	font-size: 18px;
+	font-weight: 400;
 }
 
 .container {
@@ -88,37 +89,41 @@ html {
 	visibility: hidden;
 	position: fixed;
 	z-index: 500;
-	right: 0;
-	top: 120px;
+	right: -50px;
+	top: 20px;
 	background-color: #6ebbd3;
 	border-radius: 3px;
-	padding: 10px;
+	padding: 1em;
 }
 
 #cart.show {
 	visibility: visible;
-	-webkit-animation: slide-left 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
-	        animation: slide-left 1s cubic-bezier(0.680, -0.550, 0.265, 1.550) both;
+	-webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 @-webkit-keyframes slide-left {
 	0% {
 	  -webkit-transform: translateX(0);
 				 transform: translateX(0);
+				 opacity: 0;
 	}
 	100% {
-	  -webkit-transform: translateX(-100px);
-				 transform: translateX(-100px);
+	  -webkit-transform: translateX(-80px);
+				 transform: translateX(-80px);
+				 opacity: 1;
 	}
  }
  @keyframes slide-left {
 	0% {
 	  -webkit-transform: translateX(0);
 				 transform: translateX(0);
+				 opacity: 0;
 	}
 	100% {
-	  -webkit-transform: translateX(-100px);
-				 transform: translateX(-100px);
+	  -webkit-transform: translateX(-80px);
+				 transform: translateX(-80px);
+				 opacity: 1;
 	}
  }
 
@@ -127,6 +132,7 @@ html {
 
 	&__sort {
 		display: flex;
+		align-items: center;
 		margin-bottom: 2em;
 	}
 
@@ -140,11 +146,15 @@ html {
 		margin-right: 2em;
 		cursor: pointer;
 		transition: all .3s;
+		border: none;
+		background-color: #fff;
+		font-family: "Montserrat", sans-serif;
+	font-size: 18px;
 	}
 
 	&__sort-price:hover,
 	&__sort-age:hover {
-		color: rgb(88, 88, 88);
+		color: rgb(117, 117, 117);
 	}
 }
 
@@ -466,8 +476,73 @@ input:checked + label:before {
 	cursor: pointer;
 }
 
+.transform {
+	transform: rotate(180deg);
+}
 
+#sortByPrice {
+	position: relative;
+	display: inline-block;
+	
+	&:hover .sort-price-dropdown {
+		display: block;
+	}
+}
 
+#sortByAge {
+	position: relative;
+	display: inline-block;
+
+	&:hover .sort-age-dropdown {
+		display: block;
+	}
+ }
+
+.sort-age-dropdown, .sort-price-dropdown {
+	display: none;
+  position: absolute;
+  background-color: #eeeeee;
+  width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.sort-age-dropdown span,  .sort-price-dropdown span{
+	color: #000;
+	padding: 12px 16px;
+	 text-align: left;
+	display: block;
+ font-size: 14px;
+ }
+
+ .sort-age-dropdown span:hover, .sort-price-dropdown span:hover {
+	 background-color: #ddd;
+ }
+
+ #reset {
+	 visibility: hidden;
+	 border: none;
+	 cursor: pointer;
+	 font-family: "Montserrat", sans-serif;
+	font-size: 16px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: 1px solid grey;
+	color: rgb(53, 53, 53);
+	transition: all .3s;
+
+	&:hover {
+		background-color: rgb(206, 206, 206);
+	}
+ }
+
+ .show {
+	 visibility: visible;
+ }
+
+ .blue-text {
+	 color: #6ebbd3;
+ }
 
 @media only screen and (max-width: 1060px) {
 	.container {

@@ -1,107 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="icon" href="data:,">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-		integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-	<link rel="stylesheet" href="/css/style.css">
-</head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="header__top">
+          <div class="header__menu">
+            <div class="logo">
+              <img
+                src="/assets/images/logo.png"
+                alt="logo"
+                class="logo--main"
+              />
+              <img src="/assets/images/logo.png" alt="" class="logo--reverse" />
+            </div>
+            <nav class="header__nav">
+              <ul class="header__nav-items">
+                <li class="header__nav-item">
+                  <a href="#" class="header__nav-link">Main</a>
+                </li>
+                <li class="header__nav-item">
+                  <a href="#" class="header__nav-link">Gallery</a>
+                </li>
+                <li class="header__nav-item">
+                  <a href="#" class="header__nav-link">News</a>
+                </li>
+                <li class="header__nav-item">
+                  <a href="#" class="header__nav-link">Profile</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="header__phone">
+            <p class="header__phone-number">+544 3490 00000</p>
+            <p class="header__phone-text">Звони скорее!</p>
+          </div>
+          <div id="cart">Добавлено в корзину</div>
+        </div>
+        <div class="header__main">
+          <h2 class="header__main-title"></h2>
+        </div>
+      </div>
+    </header>
 
-<body>
-	<header class="header">
-		<!-- <div class="background"> -->
-		<div class="container">
-			<div class="header__top">
-				<div class="header__menu">
-					<div class="logo">
-						<img src="/assets/images/logo.png" alt="logo" class="logo--main">
-						<img src="/assets/images/logo.png" alt="" class="logo--reverse">
-					</div>
-					<nav class="header__nav">
-						<ul class="header__nav-items">
-							<li class="header__nav-item"><a href="#" class="header__nav-link">Main</a></li>
-							<li class="header__nav-item"><a href="#" class="header__nav-link">Gallery</a></li>
-							<li class="header__nav-item"><a href="#" class="header__nav-link">News</a></li>
-							<li class="header__nav-item"><a href="#" class="header__nav-link">Profile</a></li>
-						</ul>
-					</nav>
-				</div>
-				<div class="header__phone">
-					<p class="header__phone-number">+544 3490 00000</p>
-					<p class="header__phone-text">Звони скорее!</p>
-				</div>
-				<div id="cart">Добавлено в корзину</div>
-			</div>
-			<div class="header__main">
-				<h2 class="header__main-title"></h2>
-			</div>
-		</div>
-		<!-- </div> -->
-	</header>
+    <main class="main">
+      <div class="container">
+        <div class="main__sort">
+          <p class="main__sortby">Сортировать по:</p>
 
-	<main class="main">
-		<div class="container">
+          <div id="sortByPrice">
+            <button class="main__sort-price">
+              Цене
+              <i class="fas fa-chevron-down arrow--price"></i>
+              <div class="sort-price-dropdown">
+                <span id="sortByPriceAscending">По возрастанию</span>
+                <span id="sortByPriceDescending">По убыванию</span>
+              </div>
+            </button>
+          </div>
 
-			<div class="main__sort">
-				<p class="main__sortby">Сортировать по:</p>
-				<div class="main__sort-price">Цене
-					<i class="fas fa-chevron-down arrow--price"></i>
-				</div>
-				<div class="main__sort-age">Возрасту
-					<i class="fas fa-chevron-down arrow--age"></i>
-				</div>
-			</div>
+          <div id="sortByAge">
+            <button class="main__sort-age">
+              Возрасту
+              <i class="fas fa-chevron-down arrow--age"></i>
+              <div class="sort-age-dropdown">
+                <span id="sortByAgeAscending">По возрастанию</span>
+                <span id="sortByAgeDescending">По убыванию</span>
+              </div>
+            </button>
+          </div>
 
-			<div class="main__catalogue">
+			 <button id="reset">Сбросить</button>
+        </div>
 
-			</div>
-			<div class="main__loadmore">
-				<div class="main__loadmore-button">Показать еще</div>
-			</div>
-		</div>
-	</main>
+        <div class="main__catalogue"></div>
+        <div class="main__loadmore">
+          <div class="main__loadmore-button">Показать еще</div>
+        </div>
+      </div>
+    </main>
 
-	<section class="promo">
-		<div class="container">
-			<div class="promo__inner">
-			<div class="promo__text">
-				<h2 class="promo__text-title">Успей купить!</h2>
-				<p class="promo__text-subtitle">Подпишись и успей<br>словить все акции</p>
-			</div>
-			<div class="promo__form">
-				<form action="">
-					<div class="promo__form-input">
-						<input type="email" class="promo__form-email" placeholder="Email">
-						<span id="invalidEmail">Invalid email</span>
-					</div>
-					<input type="submit" class="promo__form-button" value="Подписаться">
-					<div class="promo__form-checkbox">
-						<input type="checkbox" id="subscribe">
-						<label for="subscribe">Подписаться на новости</label>
-						<div id="subscribeModal" class="modal">
-							<div class="modal-content">
-							  <span class="close">&times;</span>
-							  <p>Спасибо за подписку!</p>
-							</div>
-						 </div>
-					</div>
-				</form>
-			</div>
-			</div>
-		</div>
-	</section>
+    <section class="promo">
+      <div class="container">
+        <div class="promo__inner">
+          <div class="promo__text">
+            <h2 class="promo__text-title">Успей купить!</h2>
+            <p class="promo__text-subtitle">
+              Подпишись и успей<br />словить все акции
+            </p>
+          </div>
+          <div class="promo__form">
+            <form action="">
+              <div class="promo__form-input">
+                <input
+                  type="email"
+                  class="promo__form-email"
+                  placeholder="Email"
+                />
+                <span id="invalidEmail">Invalid email</span>
+              </div>
+              <input
+                type="submit"
+                class="promo__form-button"
+                value="Подписаться"
+              />
+              <div class="promo__form-checkbox">
+                <input type="checkbox" id="subscribe" />
+                <label for="subscribe">Подписаться на новости</label>
+                <div id="subscribeModal" class="modal">
+                  <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Спасибо за подписку!</p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
 
-	<div class="back_to_top"><i class="fas fa-chevron-up"></i></div>
+    <div class="back_to_top"><i class="fas fa-chevron-up"></i></div>
 
-	<script src="/js/index.js"></script>
-</body>
-
+    <script src="/js/index.js"></script>
+  </body>
 </html>
