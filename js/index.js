@@ -45,11 +45,11 @@ async function loadCatsData() {
 }
 
 function showCats(cats) {
-  showCatsInfo(cats);
+  showEachCat(cats);
   showCatsAmount(cats);
 }
 
-function showCatsInfo(cats, startShowCats = 0) {
+function showEachCat(cats, startShowCats = 0) {
   for (let i = startShowCats; i < CATS_PER_PAGE; i++) {
     catsOutput += `
 			<div class="item">
@@ -88,21 +88,21 @@ function showCatsInfo(cats, startShowCats = 0) {
   mainCatalogue.innerHTML += catsOutput;
 }
 
-function loadMoreCats() {
-	startShowCats += CATS_PER_PAGE;
-	showCatsInfo(cats, startShowCats);
-	loadmoreBtn.textContent = `Показать еще ${
-	  cats.length - CATS_PER_PAGE - startShowCats
-	}`;
- 
-	if (startShowCats === cats.length - CATS_PER_PAGE) {
-	  loadmoreBtn.style.display = "none";
-	}
- }
-
 function showCatsAmount(cats) {
   catsAmountTitle.textContent = `Найдено ${cats.length} котов`;
   loadmoreBtn.textContent = `Показать еще ${cats.length - CATS_PER_PAGE}`;
+}
+
+function loadMoreCats() {
+  startShowCats += CATS_PER_PAGE;
+  showEachCat(cats, startShowCats);
+  loadmoreBtn.textContent = `Показать еще ${
+    cats.length - CATS_PER_PAGE - startShowCats
+  }`;
+
+  if (startShowCats === cats.length - CATS_PER_PAGE) {
+    loadmoreBtn.style.display = "none";
+  }
 }
 
 function sortCats(cats, criteria, order) {
@@ -119,7 +119,7 @@ function sortCats(cats, criteria, order) {
       a[criteria] > b[criteria] ? 1 : b[criteria] > a[criteria] ? -1 : 0
     );
   }
-  showCatsInfo(cats, 0);
+  showEachCat(cats, 0);
 }
 
 function sortPriceUp() {
@@ -163,16 +163,16 @@ function sortAgeDown() {
 }
 
 function resetCats() {
-	catsOutput = "";
-	mainCatalogue.innerHTML = "";
-	showCatsAmount(cats);
-	showCatsInfo(cats);
-	resetBtn.style.visibility = "hidden";
-	sortByAge.classList.remove("blue-text");
-	sortByPrice.classList.remove("blue-text");
-	arrowAge.classList.remove("transform");
-	arrowPrice.classList.remove("transform");
- }
+  catsOutput = "";
+  mainCatalogue.innerHTML = "";
+  showCatsAmount(cats);
+  showEachCat(cats);
+  resetBtn.style.visibility = "hidden";
+  sortByAge.classList.remove("blue-text");
+  sortByPrice.classList.remove("blue-text");
+  arrowAge.classList.remove("transform");
+  arrowPrice.classList.remove("transform");
+}
 
 function showToast() {
   toast.classList = "show";
@@ -194,31 +194,31 @@ function isValid(email) {
 }
 
 function subscribtion(event) {
-	event.preventDefault();
- 
-	if (isValid(userEmailForm.value)) {
-	  showSubscribeModal();
-	  userEmailForm.value = "";
-	  invalidEmail.style.display = "none";
-	  userEmailForm.style.border = "none";
-	} else {
-	  invalidEmail.style.display = "inline";
-	  userEmailForm.style.border = "3px solid rgb(255, 0, 0)";
-	}
- }
+  event.preventDefault();
 
- function showSubscribeModal() {
-	subscribeModal.style.display = "block";
- }
+  if (isValid(userEmailForm.value)) {
+    showSubscribeModal();
+    userEmailForm.value = "";
+    invalidEmail.style.display = "none";
+    userEmailForm.style.border = "none";
+  } else {
+    invalidEmail.style.display = "inline";
+    userEmailForm.style.border = "3px solid rgb(255, 0, 0)";
+  }
+}
+
+function showSubscribeModal() {
+  subscribeModal.style.display = "block";
+}
 
 function closeSubscribeModal() {
-	subscribeModal.style.display = "none";
- }
+  subscribeModal.style.display = "none";
+}
 
 function closeModalBackground(event) {
-	if (event.target == subscribeModal) {
-	  subscribeModal.style.display = "none";
-	}
+  if (event.target == subscribeModal) {
+    subscribeModal.style.display = "none";
+  }
 }
 
 (function () {
