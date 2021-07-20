@@ -1,6 +1,5 @@
 @import "nullstyle.scss";
 
-
 html {
 	font-family: "Montserrat", sans-serif;
 	font-size: 18px;
@@ -98,34 +97,34 @@ html {
 
 #cart.show {
 	visibility: visible;
-	-webkit-animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @-webkit-keyframes slide-left {
 	0% {
-	  -webkit-transform: translateX(0);
-				 transform: translateX(0);
-				 opacity: 0;
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+		opacity: 0;
 	}
 	100% {
-	  -webkit-transform: translateX(-80px);
-				 transform: translateX(-80px);
-				 opacity: 1;
+		-webkit-transform: translateX(-80px);
+		transform: translateX(-80px);
+		opacity: 1;
 	}
- }
- @keyframes slide-left {
+}
+@keyframes slide-left {
 	0% {
-	  -webkit-transform: translateX(0);
-				 transform: translateX(0);
-				 opacity: 0;
+		-webkit-transform: translateX(0);
+		transform: translateX(0);
+		opacity: 0;
 	}
 	100% {
-	  -webkit-transform: translateX(-80px);
-				 transform: translateX(-80px);
-				 opacity: 1;
+		-webkit-transform: translateX(-80px);
+		transform: translateX(-80px);
+		opacity: 1;
 	}
- }
+}
 
 .main {
 	padding: 2em 0;
@@ -145,11 +144,11 @@ html {
 	&__sort-age {
 		margin-right: 2em;
 		cursor: pointer;
-		transition: all .3s;
+		transition: all 0.3s;
 		border: none;
 		background-color: #fff;
 		font-family: "Montserrat", sans-serif;
-	font-size: 18px;
+		font-size: 18px;
 	}
 
 	&__sort-price:hover,
@@ -237,25 +236,17 @@ html {
 	&__decription {
 		position: relative;
 		display: flex;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		margin: 22px 0;
 		padding-left: 18px;
 		font-size: 0.75rem;
 		line-height: 1.3em;
+		border-left: 5px solid #6ebbd3;
 	}
 
 	&__decription strong {
 		font-size: 1rem;
 		font-weight: 700;
-	}
-
-	&__description:before {
-		position: absolute;
-		content: "";
-		width: 4px;
-		height: 26px;
-		margin-left: -18px;
-		background-color: #6ebbd3;
 	}
 
 	&__price {
@@ -483,7 +474,7 @@ input:checked + label:before {
 #sortByPrice {
 	position: relative;
 	display: inline-block;
-	
+
 	&:hover .sort-price-dropdown {
 		display: block;
 	}
@@ -496,53 +487,56 @@ input:checked + label:before {
 	&:hover .sort-age-dropdown {
 		display: block;
 	}
- }
-
-.sort-age-dropdown, .sort-price-dropdown {
-	display: none;
-  position: absolute;
-  background-color: #eeeeee;
-  width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
 }
 
-.sort-age-dropdown span,  .sort-price-dropdown span{
+.sort-age-dropdown,
+.sort-price-dropdown {
+	display: none;
+	position: absolute;
+	background-color: #eeeeee;
+	width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.sort-age-dropdown span,
+.sort-price-dropdown span {
 	color: #000;
 	padding: 12px 16px;
-	 text-align: left;
+	text-align: left;
 	display: block;
- font-size: 14px;
- }
+	font-size: 14px;
+}
 
- .sort-age-dropdown span:hover, .sort-price-dropdown span:hover {
-	 background-color: #ddd;
- }
+.sort-age-dropdown span:hover,
+.sort-price-dropdown span:hover {
+	background-color: #ddd;
+}
 
- #reset {
-	 visibility: hidden;
-	 border: none;
-	 cursor: pointer;
-	 font-family: "Montserrat", sans-serif;
+#reset {
+	visibility: hidden;
+	border: none;
+	cursor: pointer;
+	font-family: "Montserrat", sans-serif;
 	font-size: 16px;
 	padding: 5px 10px;
 	border-radius: 5px;
 	border: 1px solid grey;
 	color: rgb(53, 53, 53);
-	transition: all .3s;
+	transition: all 0.3s;
 
 	&:hover {
 		background-color: rgb(206, 206, 206);
 	}
- }
+}
 
- .show {
-	 visibility: visible;
- }
+.show {
+	visibility: visible;
+}
 
- .blue-text {
-	 color: #6ebbd3;
- }
+.blue-text {
+	color: #6ebbd3;
+}
 
 @media only screen and (max-width: 1060px) {
 	.container {
@@ -553,28 +547,40 @@ input:checked + label:before {
 	}
 	.header__main-title {
 		margin: 1em 2em;
-  }
- }
+	}
+}
 
 @media only screen and (max-width: 1000px) {
 	.header__nav-item {
 		margin-left: 3em;
-  }
-  .header {
-	  padding: 1em 0;
-  }
-  .item__content {
+	}
+	.header {
+		padding: 1em 0;
+	}
+	.item__content {
 		padding: 1.5em;
-  }
-  .promo__inner {
-	  padding: 2em;
-  }
-  .promo__form-email {
-	width: 20em;
-  }
-  .promo__text-subtitle {
-	font-size: 1.5rem;
-  }
+	}
+	.promo__inner {
+		padding: 2em;
+	}
+	.promo__form-email {
+		width: 20em;
+	}
+	.promo__text-subtitle {
+		font-size: 1.5rem;
+	}
+	.main {
+		padding-top: 1em;
+	}
+	.main__sort {
+		margin-bottom: 1em;
+	}
+	.main__loadmore {
+		margin-bottom: 1em;
+	}
+	.main__catalogue {
+		margin-bottom: 3em;
+	}
 }
 
 @media only screen and (max-width: 967px) {
@@ -590,7 +596,7 @@ input:checked + label:before {
 	}
 	.promo__text-subtitle {
 		font-size: 1.2rem;
-  }
+	}
 }
 
 @media only screen and (max-width: 820px) {
@@ -603,6 +609,9 @@ input:checked + label:before {
 	}
 	.header__main-title {
 		margin: 0;
+	}
+	.header__nav-link {
+		font-size: 16px;
 	}
 }
 

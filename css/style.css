@@ -320,8 +320,8 @@ html {
 .main__sort-price, .main__sort-age {
   margin-right: 2em;
   cursor: pointer;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   border: none;
   background-color: #fff;
   font-family: "Montserrat", sans-serif;
@@ -424,27 +424,19 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin: 22px 0;
   padding-left: 18px;
   font-size: 0.75rem;
   line-height: 1.3em;
+  border-left: 5px solid #6ebbd3;
 }
 
 .item__decription strong {
   font-size: 1rem;
   font-weight: 700;
-}
-
-.item__description:before {
-  position: absolute;
-  content: "";
-  width: 4px;
-  height: 26px;
-  margin-left: -18px;
-  background-color: #6ebbd3;
 }
 
 .item__price {
@@ -714,7 +706,8 @@ input:checked + label:before {
   display: block;
 }
 
-.sort-age-dropdown, .sort-price-dropdown {
+.sort-age-dropdown,
+.sort-price-dropdown {
   display: none;
   position: absolute;
   background-color: #eeeeee;
@@ -724,7 +717,8 @@ input:checked + label:before {
   z-index: 1;
 }
 
-.sort-age-dropdown span, .sort-price-dropdown span {
+.sort-age-dropdown span,
+.sort-price-dropdown span {
   color: #000;
   padding: 12px 16px;
   text-align: left;
@@ -732,7 +726,8 @@ input:checked + label:before {
   font-size: 14px;
 }
 
-.sort-age-dropdown span:hover, .sort-price-dropdown span:hover {
+.sort-age-dropdown span:hover,
+.sort-price-dropdown span:hover {
   background-color: #ddd;
 }
 
@@ -746,8 +741,8 @@ input:checked + label:before {
   border-radius: 5px;
   border: 1px solid grey;
   color: #353535;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 #reset:hover {
@@ -794,6 +789,18 @@ input:checked + label:before {
   .promo__text-subtitle {
     font-size: 1.5rem;
   }
+  .main {
+    padding-top: 1em;
+  }
+  .main__sort {
+    margin-bottom: 1em;
+  }
+  .main__loadmore {
+    margin-bottom: 1em;
+  }
+  .main__catalogue {
+    margin-bottom: 3em;
+  }
 }
 
 @media only screen and (max-width: 967px) {
@@ -825,6 +832,9 @@ input:checked + label:before {
   }
   .header__main-title {
     margin: 0;
+  }
+  .header__nav-link {
+    font-size: 16px;
   }
 }
 

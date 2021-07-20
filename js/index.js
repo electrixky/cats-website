@@ -1,6 +1,7 @@
 "use strict";
 
 let catsAmountTitle = document.querySelector(".header__main-title");
+let mainCatalogue = document.querySelector(".main__catalogue");
 let subscribeModal = document.querySelector("#subscribeModal");
 let subscribeBtn = document.querySelector(".promo__form-button");
 let closeModalBtn = document.querySelector(".close");
@@ -16,13 +17,21 @@ let sortByAgeAscending = document.querySelector("#sortByAgeAscending");
 let sortByAgeDescending = document.querySelector("#sortByAgeDescending");
 let sortByAge = document.querySelector(".main__sort-age");
 let resetBtn = document.querySelector("#reset");
+let loadmoreBtn = document.querySelector(".main__loadmore-button");
 
 const CATS_PER_PAGE = 6;
 let cats = [];
-let displayableCount = CATS_PER_PAGE;
+let catsOutput = "";
+let startShowCats = 0;
+let catsDisplayed = 0;
 let sortedByPriceAscending = false;
 let sortedByAge = false;
 
+sortByPriceAscending.addEventListener("click", sortPriceUp);
+sortByPriceDescending.addEventListener("click", sortPriceDown);
+sortByAgeAscending.addEventListener("click", sortAgeUp);
+sortByAgeDescending.addEventListener("click", sortAgeDown);
+resetBtn.addEventListener("click", resetCats);
 
 async function loadCatsData() {
   const response = await fetch("/data.json");
@@ -36,11 +45,9 @@ function showCats(cats) {
   showCatsAmount(cats);
 }
 
-function showCatsInfo(cats) {
-  let out = "";
-
-  for (let i = 0; i < displayableCount; i++) {
-    out += `
+function showCatsInfo(cats, startShowCats = 0) {
+  for (let i = startShowCats; i < CATS_PER_PAGE; i++) {
+    catsOutput += `
 			<div class="item">
 						<div class="item__inner">
 							<div class="item__photo">
@@ -71,16 +78,34 @@ function showCatsInfo(cats) {
 						</div>
 					</div>
 			`;
-  }
 
-  document.querySelector(".main__catalogue").innerHTML = out;
+    catsDisplayed += CATS_PER_PAGE;
+  }
+  mainCatalogue.innerHTML += catsOutput;
 }
+
+loadmoreBtn.addEventListener("click", function () {
+  startShowCats += CATS_PER_PAGE;
+  showCatsInfo(cats, startShowCats);
+  loadmoreBtn.textContent = `Показать еще ${
+    cats.length - CATS_PER_PAGE - startShowCats
+  }`;
+
+  if (startShowCats === cats.length - CATS_PER_PAGE) {
+    loadmoreBtn.style.display = "none";
+  }
+});
 
 function showCatsAmount(cats) {
   catsAmountTitle.textContent = `Найдено ${cats.length} котов`;
+  loadmoreBtn.textContent = `Показать еще ${cats.length - CATS_PER_PAGE}`;
 }
 
 function sortCats(cats, criteria, order) {
+  catsOutput = "";
+  mainCatalogue.innerHTML = "";
+  showCatsAmount(cats);
+
   if (order === "ascending") {
     cats.sort((a, b) =>
       a[criteria] > b[criteria] ? 1 : b[criteria] > a[criteria] ? -1 : 0
@@ -90,57 +115,60 @@ function sortCats(cats, criteria, order) {
       a[criteria] > b[criteria] ? 1 : b[criteria] > a[criteria] ? -1 : 0
     );
   }
-  showCatsInfo(cats);
+  showCatsInfo(cats, 0);
 }
 
-sortByPriceAscending.addEventListener("click", function () {
+function sortPriceUp() {
   let catsCopy = JSON.parse(JSON.stringify(cats));
-  sortByPrice.classList.add("blue-text")
-  resetBtn.style.visibility = "visible"
+  sortByPrice.classList.add("blue-text");
+  sortByAge.classList.remove("blue-text");
+  resetBtn.style.visibility = "visible";
 
-    sortCats(catsCopy, "price", "ascending");
-    //sortedByPriceAscending = true;
-		 arrowPrice.classList.add("transform");
-});
+  sortCats(catsCopy, "price", "ascending");
+  arrowPrice.classList.add("transform");
+}
 
-sortByPriceDescending.addEventListener("click", function () {
-	let catsCopy = JSON.parse(JSON.stringify(cats));
-	sortByPrice.classList.add("blue-text")
-  resetBtn.style.visibility = "visible"
- 
-	arrowPrice.classList.remove("transform");
-	  sortCats(catsCopy, "price", "descending");
-	  //sortedByPriceAscending = false;
- });
+function sortPriceDown() {
+  let catsCopy = JSON.parse(JSON.stringify(cats));
+  sortByPrice.classList.add("blue-text");
+  resetBtn.style.visibility = "visible";
 
-sortByAgeAscending.addEventListener("click", function () {
-	let catsCopy = JSON.parse(JSON.stringify(cats));
-	sortByAge.classList.add("blue-text")
-  resetBtn.style.visibility = "visible"
+  arrowPrice.classList.remove("transform");
+  sortByAge.classList.remove("blue-text");
+  sortCats(catsCopy, "price", "descending");
+}
 
-	  sortCats(catsCopy, "age", "ascending");
-	  arrowAge.classList.add("transform");
-	  //sortedByAge = true;
- });
+function sortAgeUp() {
+  let catsCopy = JSON.parse(JSON.stringify(cats));
+  sortByAge.classList.add("blue-text");
+  sortByPrice.classList.remove("blue-text");
+  resetBtn.style.visibility = "visible";
 
- sortByAgeDescending.addEventListener("click", function () {
-	let catsCopy = JSON.parse(JSON.stringify(cats));
-	sortByAge.classList.add("blue-text")
-  resetBtn.style.visibility = "visible"
- 
-	  sortCats(catsCopy, "age", "descending");
-	  arrowAge.classList.remove("transform");
-	  //sortedByAge = true;
- });
+  sortCats(catsCopy, "age", "ascending");
+  arrowAge.classList.add("transform");
+}
 
- resetBtn.addEventListener("click", function() {
+function sortAgeDown() {
+  let catsCopy = JSON.parse(JSON.stringify(cats));
+  sortByAge.classList.add("blue-text");
+  sortByPrice.classList.remove("blue-text");
+  resetBtn.style.visibility = "visible";
+
+  sortCats(catsCopy, "age", "descending");
+  arrowAge.classList.remove("transform");
+}
+
+function resetCats() {
+	catsOutput = "";
+	mainCatalogue.innerHTML = "";
+	showCatsAmount(cats);
 	showCatsInfo(cats);
-	resetBtn.style.visibility = "hidden"
-	sortByAge.classList.remove("blue-text")
-	sortByPrice.classList.remove("blue-text")
+	resetBtn.style.visibility = "hidden";
+	sortByAge.classList.remove("blue-text");
+	sortByPrice.classList.remove("blue-text");
 	arrowAge.classList.remove("transform");
 	arrowPrice.classList.remove("transform");
- })
+ }
 
 function showToast() {
   toast.classList = "show";
