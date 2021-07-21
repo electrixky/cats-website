@@ -35,30 +35,7 @@
 		"isSold" : false,
 		"image" : "/assets/images/cats/cat3.png"
 	},
-	{
-		"id" : 3,
-		"name" : "Кот полосатый",
-		"color" : "Коричневый",
-		"age" : 2,
-		"paw" : 4,
-		"price" : 25000,
-		"isLiked" : false,
-		"onSale" : false,
-		"isSold" : false,
-		"image" : "/assets/images/cats/cat2.png"
-	},
-	{
-		"id" : 4,
-		"name" : "Кот полосатый",
-		"color" : "Коричневый",
-		"age" : 5,
-		"paw" : 4,
-		"price" : 30000,
-		"isLiked" : false,
-		"onSale" : true,
-		"isSold" : false,
-		"image" : "/assets/images/cats/cat3.png"
-	},
+	
 	{
 		"id" : 5,
 		"name" : "Кот полосатый",
@@ -104,6 +81,30 @@
 		"price" : 20000,
 		"isLiked" : false,
 		"onSale" : false,
+		"isSold" : false,
+		"image" : "/assets/images/cats/cat3.png"
+	},
+	{
+		"id" : 3,
+		"name" : "Кот полосатый",
+		"color" : "Коричневый",
+		"age" : 2,
+		"paw" : 4,
+		"price" : 25000,
+		"isLiked" : false,
+		"onSale" : false,
+		"isSold" : false,
+		"image" : "/assets/images/cats/cat2.png"
+	},
+	{
+		"id" : 4,
+		"name" : "Кот полосатый",
+		"color" : "Коричневый",
+		"age" : 5,
+		"paw" : 4,
+		"price" : 30000,
+		"isLiked" : false,
+		"onSale" : true,
 		"isSold" : false,
 		"image" : "/assets/images/cats/cat3.png"
 	},
@@ -167,18 +168,7 @@
 		"isSold" : true,
 		"image" : "/assets/images/cats/cat2.png"
 	},
-	{
-		"id" : 14,
-		"name" : "Кот полосатый",
-		"color" : "Коричневый",
-		"age" : 4,
-		"paw" : 4,
-		"price" : 20000,
-		"isLiked" : false,
-		"onSale" : false,
-		"isSold" : false,
-		"image" : "/assets/images/cats/cat3.png"
-	},
+	
 	{
 		"id" : 15,
 		"name" : "Кот полосатый",
@@ -200,6 +190,18 @@
 		"price" : 30000,
 		"isLiked" : false,
 		"onSale" : true,
+		"isSold" : false,
+		"image" : "/assets/images/cats/cat3.png"
+	},
+	{
+		"id" : 14,
+		"name" : "Кот полосатый",
+		"color" : "Коричневый",
+		"age" : 4,
+		"paw" : 4,
+		"price" : 20000,
+		"isLiked" : false,
+		"onSale" : false,
 		"isSold" : false,
 		"image" : "/assets/images/cats/cat3.png"
 	},

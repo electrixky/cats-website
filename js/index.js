@@ -26,6 +26,7 @@ let startShowCats = 0;
 let catsDisplayed = 0;
 let sortedByPriceAscending = false;
 let sortedByAge = false;
+let displayableLimit = 6;
 
 sortByPriceAscending.addEventListener("click", sortPriceUp);
 sortByPriceDescending.addEventListener("click", sortPriceDown);
@@ -50,7 +51,7 @@ function showCats(cats) {
 }
 
 function showEachCat(cats, startShowCats = 0) {
-  for (let i = startShowCats; i < CATS_PER_PAGE; i++) {
+  for (let i = startShowCats; i < displayableLimit; i++) {
     catsOutput += `
 			<div class="item">
 						<div class="item__inner">
@@ -85,7 +86,7 @@ function showEachCat(cats, startShowCats = 0) {
 
     catsDisplayed += CATS_PER_PAGE;
   }
-  mainCatalogue.innerHTML += catsOutput;
+  mainCatalogue.innerHTML = catsOutput;
 }
 
 function showCatsAmount(cats) {
@@ -95,6 +96,7 @@ function showCatsAmount(cats) {
 
 function loadMoreCats() {
   startShowCats += CATS_PER_PAGE;
+  displayableLimit += 6;
   showEachCat(cats, startShowCats);
   loadmoreBtn.textContent = `Показать еще ${
     cats.length - CATS_PER_PAGE - startShowCats
@@ -109,6 +111,8 @@ function sortCats(cats, criteria, order) {
   catsOutput = "";
   mainCatalogue.innerHTML = "";
   showCatsAmount(cats);
+  displayableLimit = cats.length;
+  loadmoreBtn.style.display = "none";
 
   if (order === "ascending") {
     cats.sort((a, b) =>
@@ -186,7 +190,7 @@ function showToast() {
   }, 3000);
 }
 
-function isValid(email) {
+function isValidEmail(email) {
   const regex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   let checkedEmail = regex.test(String(email).toLowerCase());
@@ -196,7 +200,7 @@ function isValid(email) {
 function subscribtion(event) {
   event.preventDefault();
 
-  if (isValid(userEmailForm.value)) {
+  if (isValidEmail(userEmailForm.value)) {
     showSubscribeModal();
     userEmailForm.value = "";
     invalidEmail.style.display = "none";
