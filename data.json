@@ -204,17 +204,5 @@
 		"onSale" : false,
 		"isSold" : false,
 		"image" : "/assets/images/cats/cat3.png"
-	},
-	{
-		"id" : 17,
-		"name" : "Кот полосатый",
-		"color" : "Коричневый",
-		"age" : 1,
-		"paw" : 4,
-		"price" : 10000,
-		"isLiked" : true,
-		"onSale" : false,
-		"isSold" : true,
-		"image" : "/assets/images/cats/cat2.png"
 	}
 ]

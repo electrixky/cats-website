@@ -48,6 +48,7 @@ async function loadCatsData() {
 function showCats(cats) {
   showEachCat(cats);
   showCatsAmount(cats);
+  showCatsLeft(cats);
 }
 
 function showEachCat(cats, startShowCats = 0) {
@@ -91,18 +92,30 @@ function showEachCat(cats, startShowCats = 0) {
 
 function showCatsAmount(cats) {
   catsAmountTitle.textContent = `Найдено ${cats.length} котов`;
-  loadmoreBtn.textContent = `Показать еще ${cats.length - CATS_PER_PAGE}`;
 }
+
+function showCatsLeft(cats) {
+	if((cats.length - startShowCats) < CATS_PER_PAGE) {
+		loadmoreBtn.textContent = `Показать еще ${cats.length - startShowCats}`;
+	} else {
+		loadmoreBtn.textContent = `Показать еще ${cats.length - CATS_PER_PAGE}`;
+	}
+ }
 
 function loadMoreCats() {
   startShowCats += CATS_PER_PAGE;
-  displayableLimit += 6;
+  
+  if(displayableLimit > (cats.length - startShowCats)) {
+	displayableLimit = cats.length;
+  } else {
+	  displayableLimit += 6;
+  }
   showEachCat(cats, startShowCats);
   loadmoreBtn.textContent = `Показать еще ${
     cats.length - CATS_PER_PAGE - startShowCats
   }`;
 
-  if (startShowCats === cats.length - CATS_PER_PAGE) {
+  if (startShowCats >= cats.length - CATS_PER_PAGE) {
     loadmoreBtn.style.display = "none";
   }
 }
@@ -110,7 +123,7 @@ function loadMoreCats() {
 function sortCats(cats, criteria, order) {
   catsOutput = "";
   mainCatalogue.innerHTML = "";
-  showCatsAmount(cats);
+  //showCatsLeft(cats);
   displayableLimit = cats.length;
   loadmoreBtn.style.display = "none";
 
@@ -169,7 +182,7 @@ function sortAgeDown() {
 function resetCats() {
   catsOutput = "";
   mainCatalogue.innerHTML = "";
-  showCatsAmount(cats);
+  showCatsLeft(cats);
   showEachCat(cats);
   resetBtn.style.visibility = "hidden";
   sortByAge.classList.remove("blue-text");
