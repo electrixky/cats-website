@@ -227,10 +227,10 @@ function closeModalBackground(event) {
     let coords = document.documentElement.clientHeight;
 
     if (scrolled > coords) {
-      goTopBtn.classList.add("back_to_top-show");
+      goTopBtn.classList.add("back-to-top-show");
     }
     if (scrolled < coords) {
-      goTopBtn.classList.remove("back_to_top-show");
+      goTopBtn.classList.remove("back-to-top-show");
     }
   }
 
@@ -241,7 +241,7 @@ function closeModalBackground(event) {
     }
   }
 
-  let goTopBtn = document.querySelector(".back_to_top");
+  let goTopBtn = document.querySelector(".back-to-top");
 
   window.addEventListener("scroll", trackScroll);
   goTopBtn.addEventListener("click", backToTop);

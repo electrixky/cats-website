@@ -390,7 +390,7 @@ input:checked + label:before {
 	}
 }
 
-.back_to_top {
+.back-to-top {
 	position: fixed;
 	bottom: 80px;
 	right: 40px;
@@ -408,11 +408,11 @@ input:checked + label:before {
 	padding: 10px;
 }
 
-.back_to_top:hover {
+.back-to-top:hover {
 	background: #5f93a3;
 }
 
-.back_to_top-show {
+.back-to-top-show {
 	display: block;
 }
 
