@@ -52,6 +52,12 @@ function showCats(cats) {
   showCatsLeft(cats);
 }
 
+function markCat(id) {
+	const foundCat = cats.find(data => data.id === id);
+	const markedCatIndex = cats.findIndex(data => data === foundCat);
+	cats.splice(markedCatIndex, 1, {...foundCat, isLiked: !foundCat.isLiked})
+}
+
 function showEachCat(cats, startShowCats = 0) {
   for (let i = startShowCats; i < displayableLimit; i++) {
     catsOutput += `
@@ -63,7 +69,7 @@ function showEachCat(cats, startShowCats = 0) {
                   cats[i]["isLiked"] === true
                     ? "item__heart liked"
                     : "item__heart"
-                }" onclick="this.classList.toggle('liked'); showToast()"></div>
+                }" onclick="this.classList.toggle('liked'); markCat(${cats[i]["id"]}); showToast()"></div>
 								<div class="${cats[i]["onSale"] === true ? "item__sale" : ""}">
 									<span>${cats[i]["onSale"] === true ? "-40%" : ""}</span>
 								</div>
