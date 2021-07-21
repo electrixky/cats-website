@@ -26,6 +26,8 @@ let startShowCats = 0;
 let catsDisplayed = 0;
 let sortedByPriceAscending = false;
 let sortedByAge = false;
+let displayableLimit = 6;
+let timerId = -1;
 
 sortByPriceAscending.addEventListener("click", sortPriceUp);
 sortByPriceDescending.addEventListener("click", sortPriceDown);
@@ -47,10 +49,17 @@ async function loadCatsData() {
 function showCats(cats) {
   showEachCat(cats);
   showCatsAmount(cats);
+  showCatsLeft(cats);
+}
+
+function markCat(id) {
+  const foundCat = cats.find((data) => data.id === id);
+  const markedCatIndex = cats.findIndex((data) => data === foundCat);
+  cats.splice(markedCatIndex, 1, { ...foundCat, isLiked: !foundCat.isLiked });
 }
 
 function showEachCat(cats, startShowCats = 0) {
-  for (let i = startShowCats; i < CATS_PER_PAGE; i++) {
+  for (let i = startShowCats; i < displayableLimit; i++) {
     catsOutput += `
 			<div class="item">
 						<div class="item__inner">
@@ -60,7 +69,9 @@ function showEachCat(cats, startShowCats = 0) {
                   cats[i]["isLiked"] === true
                     ? "item__heart liked"
                     : "item__heart"
-                }" onclick="this.classList.toggle('liked'); showToast()"></div>
+                }" onclick="this.classList.toggle('liked'); markCat(${
+      cats[i]["id"]
+    }); showToast()"></div>
 								<div class="${cats[i]["onSale"] === true ? "item__sale" : ""}">
 									<span>${cats[i]["onSale"] === true ? "-40%" : ""}</span>
 								</div>
@@ -85,22 +96,35 @@ function showEachCat(cats, startShowCats = 0) {
 
     catsDisplayed += CATS_PER_PAGE;
   }
-  mainCatalogue.innerHTML += catsOutput;
+  mainCatalogue.innerHTML = catsOutput;
 }
 
 function showCatsAmount(cats) {
   catsAmountTitle.textContent = `Найдено ${cats.length} котов`;
-  loadmoreBtn.textContent = `Показать еще ${cats.length - CATS_PER_PAGE}`;
+}
+
+function showCatsLeft(cats) {
+  if (cats.length - startShowCats < CATS_PER_PAGE) {
+    loadmoreBtn.textContent = `Показать еще ${cats.length - startShowCats}`;
+  } else {
+    loadmoreBtn.textContent = `Показать еще ${cats.length - CATS_PER_PAGE}`;
+  }
 }
 
 function loadMoreCats() {
   startShowCats += CATS_PER_PAGE;
+
+  if (displayableLimit > cats.length - startShowCats) {
+    displayableLimit = cats.length;
+  } else {
+    displayableLimit += 6;
+  }
   showEachCat(cats, startShowCats);
   loadmoreBtn.textContent = `Показать еще ${
     cats.length - CATS_PER_PAGE - startShowCats
   }`;
 
-  if (startShowCats === cats.length - CATS_PER_PAGE) {
+  if (startShowCats >= cats.length - CATS_PER_PAGE) {
     loadmoreBtn.style.display = "none";
   }
 }
@@ -108,7 +132,8 @@ function loadMoreCats() {
 function sortCats(cats, criteria, order) {
   catsOutput = "";
   mainCatalogue.innerHTML = "";
-  showCatsAmount(cats);
+  displayableLimit = cats.length;
+  loadmoreBtn.style.display = "none";
 
   if (order === "ascending") {
     cats.sort((a, b) =>
@@ -165,7 +190,7 @@ function sortAgeDown() {
 function resetCats() {
   catsOutput = "";
   mainCatalogue.innerHTML = "";
-  showCatsAmount(cats);
+  showCatsLeft(cats);
   showEachCat(cats);
   resetBtn.style.visibility = "hidden";
   sortByAge.classList.remove("blue-text");
@@ -175,18 +200,23 @@ function resetCats() {
 }
 
 function showToast() {
+  if (timerId > -1) {
+    clearTimeout(timerId);
+    refreshTimer();
+    timerId = -1;
+  } else {
+    refreshTimer();
+  }
+}
+
+function refreshTimer() {
   toast.classList = "show";
-
-  let timerId = setInterval(function () {
-    toast.classList.toggle("show");
-  }, 3000);
-
-  setTimeout(() => {
-    clearInterval(timerId);
+  timerId = setTimeout(function () {
+    toast.classList.remove("show");
   }, 3000);
 }
 
-function isValid(email) {
+function isValidEmail(email) {
   const regex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   let checkedEmail = regex.test(String(email).toLowerCase());
@@ -196,7 +226,7 @@ function isValid(email) {
 function subscribtion(event) {
   event.preventDefault();
 
-  if (isValid(userEmailForm.value)) {
+  if (isValidEmail(userEmailForm.value)) {
     showSubscribeModal();
     userEmailForm.value = "";
     invalidEmail.style.display = "none";
@@ -227,10 +257,10 @@ function closeModalBackground(event) {
     let coords = document.documentElement.clientHeight;
 
     if (scrolled > coords) {
-      goTopBtn.classList.add("back_to_top-show");
+      goTopBtn.classList.add("back-to-top-show");
     }
     if (scrolled < coords) {
-      goTopBtn.classList.remove("back_to_top-show");
+      goTopBtn.classList.remove("back-to-top-show");
     }
   }
 
@@ -241,7 +271,7 @@ function closeModalBackground(event) {
     }
   }
 
-  let goTopBtn = document.querySelector(".back_to_top");
+  let goTopBtn = document.querySelector(".back-to-top");
 
   window.addEventListener("scroll", trackScroll);
   goTopBtn.addEventListener("click", backToTop);
