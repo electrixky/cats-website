@@ -27,6 +27,7 @@ let catsDisplayed = 0;
 let sortedByPriceAscending = false;
 let sortedByAge = false;
 let displayableLimit = 6;
+let timerId = -1;
 
 sortByPriceAscending.addEventListener("click", sortPriceUp);
 sortByPriceDescending.addEventListener("click", sortPriceDown);
@@ -95,20 +96,20 @@ function showCatsAmount(cats) {
 }
 
 function showCatsLeft(cats) {
-	if((cats.length - startShowCats) < CATS_PER_PAGE) {
-		loadmoreBtn.textContent = `Показать еще ${cats.length - startShowCats}`;
-	} else {
-		loadmoreBtn.textContent = `Показать еще ${cats.length - CATS_PER_PAGE}`;
-	}
- }
+  if (cats.length - startShowCats < CATS_PER_PAGE) {
+    loadmoreBtn.textContent = `Показать еще ${cats.length - startShowCats}`;
+  } else {
+    loadmoreBtn.textContent = `Показать еще ${cats.length - CATS_PER_PAGE}`;
+  }
+}
 
 function loadMoreCats() {
   startShowCats += CATS_PER_PAGE;
-  
-  if(displayableLimit > (cats.length - startShowCats)) {
-	displayableLimit = cats.length;
+
+  if (displayableLimit > cats.length - startShowCats) {
+    displayableLimit = cats.length;
   } else {
-	  displayableLimit += 6;
+    displayableLimit += 6;
   }
   showEachCat(cats, startShowCats);
   loadmoreBtn.textContent = `Показать еще ${
@@ -123,7 +124,6 @@ function loadMoreCats() {
 function sortCats(cats, criteria, order) {
   catsOutput = "";
   mainCatalogue.innerHTML = "";
-  //showCatsLeft(cats);
   displayableLimit = cats.length;
   loadmoreBtn.style.display = "none";
 
@@ -192,14 +192,19 @@ function resetCats() {
 }
 
 function showToast() {
+  if (timerId > -1) {
+    clearTimeout(timerId);
+    refreshTimer();
+    timerId = -1;
+  } else {
+    refreshTimer();
+  }
+}
+
+function refreshTimer() {
   toast.classList = "show";
-
-  let timerId = setInterval(function () {
-    toast.classList.toggle("show");
-  }, 3000);
-
-  setTimeout(() => {
-    clearInterval(timerId);
+  timerId = setTimeout(function () {
+    toast.classList.remove("show");
   }, 3000);
 }
 
